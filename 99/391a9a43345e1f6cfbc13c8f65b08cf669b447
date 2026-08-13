@@ -1,0 +1,14 @@
+index.html
+  h_74a67252e15695 1-390
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "99391a9a43345e1f6cfbc13c8f65b08cf669b447",
+  "prompts": {},
+  "humans": {
+    "h_74a67252e15695": {
+      "author": "Bloooskiii <muthana@trybytes.ai>"
+    }
+  }
+}
