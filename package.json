@@ -1,0 +1,12 @@
+{
+  "name": "bytes-ai-investor-one-pager",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bytes AI investor one-pager landing page (static site).",
+  "scripts": {
+    "start": "serve -s . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
