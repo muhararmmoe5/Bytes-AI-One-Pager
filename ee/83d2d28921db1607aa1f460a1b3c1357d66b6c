@@ -1,0 +1,16 @@
+README.md
+  h_74a67252e15695 1-12
+railway.json
+  h_74a67252e15695 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ee83d2d28921db1607aa1f460a1b3c1357d66b6c",
+  "prompts": {},
+  "humans": {
+    "h_74a67252e15695": {
+      "author": "Bloooskiii <muthana@trybytes.ai>"
+    }
+  }
+}
