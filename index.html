@@ -268,10 +268,20 @@
       #chrome, #rail, #hud, #progress, #overview, #gate, #hint { display: none !important; }
       #deck { position: static !important; inset: auto !important; }
       .slide {
-        position: static !important; inset: auto !important; width: 100%; height: 100vh;
+        position: static !important; inset: auto !important;
+        /* scale the whole slide and inflate its canvas so the scaled result
+           exactly fills one page — keeps flex centering true */
+        /* page = 13.333in × 7.5in = 1280 × 720 CSS px; heights are
+           precomputed per zoom because vh-in-calc resolves to auto in the
+           real print pass: 720 / 0.78 ≈ 923 → 922px (1px slack) */
+        zoom: 0.78; width: 100%; height: 922px;
         opacity: 1 !important; visibility: visible !important; transform: none !important;
         overflow: hidden; page-break-after: always; break-after: page; break-inside: avoid;
-        padding: 42px 56px; display: flex;
+        padding: 48px 64px;
+        /* the paginator strips flex auto-margins and table-cell alignment on
+           the page box itself, so center INSIDE it: the slide is a plain
+           block and .inner is a full-height flex column that centers */
+        display: block;
         background:
           radial-gradient(ellipse 60% 45% at 75% -5%, rgba(255,80,20,0.26), transparent 65%),
           radial-gradient(ellipse 45% 35% at 8% 45%, rgba(255,120,60,0.12), transparent 70%),
@@ -279,22 +289,17 @@
           #060504 !important;
       }
       .slide:last-of-type { page-break-after: auto; }
-      .slide .inner { margin: auto; zoom: 0.72; }
+      .slide .inner {
+        height: 100%; max-width: none; margin: 0;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      .slide .inner > * { width: 100%; max-width: 1240px; margin-left: auto !important; margin-right: auto !important; }
       /* dense table slides need a smaller scale to fit one page */
-      .slide[data-label="Product"] .inner,
-      .slide[data-label="Competition"] .inner { zoom: 0.62; }
+      .slide[data-label="Product"],
+      .slide[data-label="Competition"] { zoom: 0.62; height: 1160px; }
       .slide .anim > * { animation: none !important; opacity: 1 !important; }
       .slide .bar-fill { animation: none !important; }
       .stat-num { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #ffb07a; color: #ffb07a; }
-    }
-    /* Portrait paper (phone menu-print, or Letter/A4 portrait): let each slide
-       fill the page width and flow naturally instead of shrinking into a fixed
-       landscape canvas. The download button always serves the real landscape deck. */
-    @media print and (orientation: portrait) {
-      .slide { height: auto; min-height: 90vh; display: block; padding: 40px 28px; break-inside: auto; }
-      .slide .inner { margin: 0 auto; zoom: 1; }
-      .slide[data-label="Product"] .inner,
-      .slide[data-label="Competition"] .inner { zoom: 0.85; }
     }
   </style>
 </head>
@@ -940,8 +945,10 @@
        renders at device width so typing stays comfortable) */
     if (document.body.classList.contains('unlocked')) initView();
 
-    var start = parseInt(location.hash.slice(1), 10);
-    go(!isNaN(start) ? start - 1 : 0);
+    /* always open on the first slide; a stale #n in the URL from a previous
+       visit shouldn't decide where the deck starts */
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    go(0);
   })();
   </script>
 </body>
