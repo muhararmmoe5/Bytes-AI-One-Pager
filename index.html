@@ -100,6 +100,25 @@
     .cbtn:hover { background: rgba(255,140,80,0.14); color: #ffb07a; border-color: rgba(255,140,80,0.35); }
     .cbtn svg { width: 17px; height: 17px; display: block; }
 
+    /* view-toggle icon states: fullscreen on desktop machines, phone/desktop swap on phones */
+    .ic-phone, .ic-desktop { display: none; }
+    body.is-phone .ic-fs { display: none; }
+    body.is-phone.forced-desktop .ic-phone { display: block; }
+    body.is-phone:not(.forced-desktop) .ic-desktop { display: block; }
+
+    /* one-time hint pill; scaled up when shown inside the 1280px desktop layout */
+    #hint {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 46;
+      background: rgba(10,8,6,0.85); border: 1px solid rgba(255,140,80,0.35); border-radius: 999px;
+      backdrop-filter: blur(16px); box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,80,20,0.15);
+      color: #ffb07a; font-size: 13px; font-weight: 600; font-family: inherit;
+      padding: 12px 22px; cursor: pointer; max-width: 92vw; white-space: nowrap;
+      opacity: 0; visibility: hidden; transition: opacity .35s, visibility 0s .35s;
+    }
+    body.hint-show #hint { opacity: 1; visibility: visible; transition-delay: 0s; }
+    body.forced-desktop #hint { font-size: 34px; padding: 30px 54px; bottom: 190px; border-width: 2px; }
+
     #progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 45; background: rgba(255,255,255,0.05); }
     #progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg,#ff3d00,#ff9a62); transition: width .35s cubic-bezier(.2,.7,.2,1); box-shadow: 0 0 12px rgba(255,80,20,0.7); }
 
@@ -243,14 +262,14 @@
         box-shadow: none !important; backdrop-filter: none !important;
         animation: none !important; transition: none !important;
       }
-      html, body { overflow: visible; background: #060504 !important; }
+      html, body { overflow: visible !important; height: auto !important; background: #060504 !important; }
       body::before { display: none; }
-      #chrome, #rail, #hud, #progress, #overview, #gate { display: none !important; }
-      #deck { position: static; }
+      #chrome, #rail, #hud, #progress, #overview, #gate, #hint { display: none !important; }
+      #deck { position: static !important; inset: auto !important; }
       .slide {
-        position: relative; inset: auto; width: 100%; height: 100vh;
+        position: static !important; inset: auto !important; width: 100%; height: 100vh;
         opacity: 1 !important; visibility: visible !important; transform: none !important;
-        overflow: hidden; page-break-after: always; break-inside: avoid;
+        overflow: hidden; page-break-after: always; break-after: page; break-inside: avoid;
         padding: 48px 56px; display: flex;
         background:
           radial-gradient(ellipse 60% 45% at 75% -5%, rgba(255,80,20,0.26), transparent 65%),
@@ -266,6 +285,15 @@
       .slide .anim > * { animation: none !important; opacity: 1 !important; }
       .slide .bar-fill { animation: none !important; }
       .stat-num { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #ffb07a; color: #ffb07a; }
+    }
+    /* Portrait paper (phone menu-print, or Letter/A4 portrait): let each slide
+       fill the page width and flow naturally instead of shrinking into a fixed
+       landscape canvas. The download button always serves the real landscape deck. */
+    @media print and (orientation: portrait) {
+      .slide { height: auto; min-height: 90vh; display: block; padding: 40px 28px; break-inside: auto; }
+      .slide .inner { margin: 0 auto; zoom: 1; }
+      .slide[data-label="Product"] .inner,
+      .slide[data-label="Competition"] .inner { zoom: 0.85; }
     }
   </style>
 </head>
@@ -303,8 +331,10 @@
     <button class="cbtn" id="btn-print" title="Download PDF (P)" aria-label="Download PDF">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
     </button>
-    <button class="cbtn" id="btn-fs" title="Fullscreen · desktop view on phone (F)" aria-label="Fullscreen or desktop view">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+    <button class="cbtn" id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen or switch view">
+      <svg class="ic-fs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      <svg class="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2.5"/><line x1="11" y1="18.5" x2="13" y2="18.5"/></svg>
+      <svg class="ic-desktop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
     </button>
   </header>
 
@@ -682,6 +712,8 @@
     </button>
   </div>
 
+  <button id="hint" type="button">Desktop layout · tap here for mobile view</button>
+
   <!-- ═══ Overview grid ═══ -->
   <div id="overview">
     <button class="cbtn" id="ov-close" title="Close (Esc)" aria-label="Close overview">
@@ -727,6 +759,7 @@
         }).catch(function () {});
       }
       unlock(email);
+      initView();
     });
 
     /* ── Deck engine ── */
@@ -812,18 +845,48 @@
     document.getElementById('ov-close').addEventListener('click', function () {
       document.body.classList.remove('overview-open');
     });
-    /* On phones (no real fullscreen on iOS) this button toggles the full
-       desktop layout instead, scaled into the phone viewport and pinch-zoomable. */
+    /* ── View management ──
+       Phones default to the full desktop layout (pinch-zoomable); the toggle
+       button and the one-time hint pill opt into the mobile-optimized view.
+       Desktop machines keep a normal fullscreen button. */
     var vpMeta = document.querySelector('meta[name="viewport"]');
-    document.getElementById('btn-fs').addEventListener('click', function () {
-      if (document.body.classList.contains('forced-desktop')) {
-        document.body.classList.remove('forced-desktop');
-        vpMeta.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover');
-        if (window.innerWidth < 900) document.body.classList.remove('rail-open');
+    var isPhone = Math.min(screen.width, screen.height) < 700;
+    var hintEl = document.getElementById('hint');
+    var fsBtn = document.getElementById('btn-fs');
+    function setView(desktop, remember) {
+      document.body.classList.toggle('forced-desktop', desktop);
+      document.body.classList.toggle('rail-open', desktop);
+      vpMeta.setAttribute('content', desktop ? 'width=1280' : 'width=device-width, initial-scale=1, viewport-fit=cover');
+      fsBtn.title = desktop ? 'Switch to mobile view' : 'Switch to desktop view';
+      if (remember) try { localStorage.setItem('bytes_view', desktop ? 'desktop' : 'mobile'); } catch (e) {}
+      document.body.classList.remove('hint-show');
+    }
+    function showHint() {
+      try {
+        if (localStorage.getItem('bytes_view_hint')) return;
+        localStorage.setItem('bytes_view_hint', '1');
+      } catch (e) {}
+      document.body.classList.add('hint-show');
+      setTimeout(function () { document.body.classList.remove('hint-show'); }, 6000);
+    }
+    hintEl.addEventListener('click', function () { setView(false, true); });
+    var viewReady = false;
+    function initView() {
+      if (viewReady) return;
+      viewReady = true;
+      if (isPhone) {
+        document.body.classList.add('is-phone');
+        var pref = null;
+        try { pref = localStorage.getItem('bytes_view'); } catch (e) {}
+        if (pref === 'mobile') { setView(false, false); }
+        else { setView(true, false); showHint(); }
       } else if (window.innerWidth < 900) {
-        document.body.classList.add('forced-desktop');
-        document.body.classList.add('rail-open');
-        vpMeta.setAttribute('content', 'width=1280');
+        document.body.classList.remove('rail-open');
+      }
+    }
+    fsBtn.addEventListener('click', function () {
+      if (isPhone) {
+        setView(!document.body.classList.contains('forced-desktop'), true);
       } else if (document.fullscreenElement) {
         document.exitFullscreen();
       } else {
@@ -833,8 +896,13 @@
 
     /* keyboard */
     document.addEventListener('keydown', function (e) {
-      if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
       if (!document.body.classList.contains('unlocked')) return;
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        downloadPdf();
+        return;
+      }
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
       switch (e.key) {
         case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': e.preventDefault(); next(); break;
         case 'ArrowLeft': case 'ArrowUp': case 'PageUp': e.preventDefault(); prev(); break;
@@ -867,8 +935,9 @@
       if (!isNaN(n)) go(n - 1);
     });
 
-    /* start closed rail on small screens */
-    if (window.innerWidth < 900) document.body.classList.remove('rail-open');
+    /* pick the right view once the deck is visible (the email gate always
+       renders at device width so typing stays comfortable) */
+    if (document.body.classList.contains('unlocked')) initView();
 
     var start = parseInt(location.hash.slice(1), 10);
     go(!isNaN(start) ? start - 1 : 0);
