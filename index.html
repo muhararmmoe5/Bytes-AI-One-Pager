@@ -169,11 +169,6 @@
     #overview .thumb { margin: 0; }
 
     /* ── Slide-specific bits (design carried over) ────────── */
-    .chip {
-      display: inline-block; margin-top: 26px; padding: 12px 24px; border-radius: 999px;
-      background: linear-gradient(100deg,#ff3d00,#ff9a62); color: #fff; font-size: 14px; font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 36px rgba(255,80,20,0.45);
-    }
     .stat-num { font-size: clamp(30px,2.9vw,38px); font-weight: 700; letter-spacing: -0.01em; margin: 12px 0 0; background: linear-gradient(120deg,#fff 30%,#ffb07a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     th { text-align: left; padding: 14px 16px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #78716c; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -213,13 +208,33 @@
       }
     }
 
-    /* ── Print → each slide becomes a PDF page ────────────── */
+    /* ── Print → each slide becomes one dark 16:10 PDF page ── */
+    @page { size: 1280px 800px; margin: 0; }
     @media print {
-      body { overflow: visible; background: #060504 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      * {
+        -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        box-shadow: none !important; backdrop-filter: none !important;
+        animation: none !important; transition: none !important;
+      }
+      html, body { overflow: visible; background: #060504 !important; }
+      body::before { display: none; }
       #chrome, #rail, #hud, #progress, #overview, #gate { display: none !important; }
       #deck { position: static; }
-      .slide { position: static; opacity: 1 !important; visibility: visible !important; transform: none !important; min-height: 100vh; page-break-after: always; overflow: visible; padding: 40px; }
-      .slide.active .anim > *, .slide .anim > * { animation: none !important; }
+      .slide {
+        position: relative; inset: auto; width: 100%; height: 100vh;
+        opacity: 1 !important; visibility: visible !important; transform: none !important;
+        overflow: hidden; page-break-after: always; break-inside: avoid;
+        padding: 48px 56px; display: flex;
+        background:
+          radial-gradient(ellipse 55% 40% at 78% -5%, rgba(255,80,20,0.14), transparent 65%),
+          radial-gradient(ellipse 50% 40% at 8% 100%, rgba(255,60,0,0.07), transparent 70%),
+          #060504 !important;
+      }
+      .slide:last-of-type { page-break-after: auto; }
+      .slide .inner { zoom: 0.82; }
+      .slide .anim > * { animation: none !important; opacity: 1 !important; }
+      .slide .bar-fill { animation: none !important; }
+      .stat-num { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #ffb07a; color: #ffb07a; }
     }
   </style>
 </head>
@@ -229,7 +244,7 @@
   <div id="gate">
     <form id="gate-form">
       <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
-        <img src="bytes-logo.png" alt="Bytes AI" style="height:52px;width:auto;margin:0 auto;display:block">
+        <img src="bytes-wordmark.png" alt="Bytes" style="height:44px;width:auto;margin:0 auto;display:block">
         <h1>Investor Deck</h1>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -248,7 +263,7 @@
     <button class="cbtn" id="btn-rail" title="Toggle slide panel (T)" aria-label="Toggle slide panel">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
     </button>
-    <img class="logo" src="bytes-logo.png" alt="Bytes AI">
+    <img class="logo" src="bytes-wordmark.png" alt="Bytes">
     <span class="conf">Confidential · Seed 2026</span>
     <span class="spacer"></span>
     <button class="cbtn" id="btn-overview" title="Overview (G)" aria-label="Overview">
@@ -269,13 +284,12 @@
 
     <!-- 1 · Title -->
     <section class="slide" data-label="Title">
-      <div class="inner" style="text-align:center">
-        <div class="anim" style="display:flex;flex-direction:column;align-items:center">
-          <img src="bytes-logo.png" alt="Bytes AI" style="height:72px;width:auto">
-          <h1 style="font-size:clamp(38px,4.6vw,64px);line-height:1.1;font-weight:700;letter-spacing:-0.015em;margin:36px 0 0;max-width:20ch">AI ordering agents for restaurants.</h1>
-          <p class="muted" style="font-size:18px;line-height:30px;max-width:52ch;margin:22px 0 0">Bytes is the AI ordering and guest platform for restaurants — agents that capture every order, remember every guest, and bring every one back.</p>
-          <span class="chip">$1.5M committed · $2.5M SAFE allocation open</span>
-          <p style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#78716c;margin:56px 0 0">Bytes AI · Investor Deck · 2026</p>
+      <div class="inner">
+        <div class="anim">
+          <img src="bytes-wordmark.png" alt="Bytes" style="height:56px;width:auto;display:block">
+          <p class="kicker" style="margin:48px 0 0">Investor deck · Seed 2026</p>
+          <h1 style="font-size:clamp(38px,4.8vw,68px);line-height:1.08;font-weight:700;letter-spacing:-0.015em;margin:16px 0 0;max-width:16ch">AI ordering agents for restaurants.</h1>
+          <p class="muted" style="font-size:18px;line-height:30px;max-width:52ch;margin:24px 0 0">Bytes is the AI ordering and guest platform for restaurants — agents that capture every order, remember every guest, and bring every one back.</p>
         </div>
       </div>
     </section>
@@ -497,27 +511,22 @@
     <section class="slide" data-label="Moat">
       <div class="inner">
         <p class="kicker">The moat</p>
-        <h2 class="headline" style="max-width:28ch">Four layers of defensibility that compound with every order.</h2>
-        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+        <h2 class="headline" style="max-width:28ch">Why this gets harder to displace every month.</h2>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="card">
             <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">01</p>
-            <p style="font-size:19px;font-weight:700;margin-top:12px">One guest identity graph</p>
-            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Every order from every channel — phone, web, app, loyalty — resolves to a single guest profile. That data compounds with every order and walks out the door if a restaurant leaves. A phone bot can’t replicate it.</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Data that compounds</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Every order deepens the guest graph — preferences, usuals, win-back triggers. A competitor lands on day one with an empty database; the AI that already knows the guest sells more from the first ring.</p>
           </div>
           <div class="card">
             <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">02</p>
-            <p style="font-size:19px;font-weight:700;margin-top:12px">The whole stack, not one channel</p>
-            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Competitors rent restaurants a single channel. Bytes owns the call, the website, the app, and the win-back loop — so the AI sells with full context, attach grows ACV to ~$6,300, and switching means replacing four systems at once.</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Switching costs, multiplied</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Phone, website, app, and loyalty run on one contract and one guest layer. Leaving Bytes means ripping out four systems at once — and abandoning the guest history that powers all of them.</p>
           </div>
           <div class="card">
             <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">03</p>
-            <p style="font-size:19px;font-weight:700;margin-top:12px">Proprietary distribution</p>
-            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">An investing wholesale partner gives Bytes an on-site sales presence at four locations serving 5,000+ restaurant owners — a warm, exclusive funnel competitors would have to cold-call their way into.</p>
-          </div>
-          <div class="card">
-            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">04</p>
-            <p style="font-size:19px;font-weight:700;margin-top:12px">Aligned economics</p>
-            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Entry at $100/mo undercuts every point solution, and the 3% share of direct sales means Bytes earns most when restaurants sell most — pricing built to land fast and impossible to follow with a single-product cost base.</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">A channel money can’t buy</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Bytes’ wholesale distribution partner is an investor — the channel is equity-aligned and exclusive, not a paid listing a competitor can outbid next quarter.</p>
           </div>
         </div>
       </div>
@@ -557,30 +566,38 @@
       <div class="inner">
         <p class="kicker">Use of funds</p>
         <h2 class="headline" style="max-width:24ch">Where the $2.5M goes.</h2>
-        <div class="card anim" style="padding:32px 28px;display:flex;flex-direction:column;gap:28px">
+        <div class="card anim" style="padding:32px 28px;display:flex;flex-direction:column;gap:26px">
           <div style="display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
               <p style="font-size:17px;font-weight:700">Distribution &amp; sales</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">40%</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">35%</p>
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+            <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
             <p class="muted" style="font-size:13px;line-height:21px">Wholesale booth presence across all four locations, first dedicated sales hires, and converting the 900+ trade-show leads into contracted locations.</p>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
               <p style="font-size:17px;font-weight:700">Product &amp; engineering</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">35%</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">30%</p>
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:35%"></div></div>
+            <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
             <p class="muted" style="font-size:13px;line-height:21px">AI Hostess and AI Website Builder depth, reliability at 1,000 concurrent calls, and onboarding automation so a location goes live in days, not weeks.</p>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
               <p style="font-size:17px;font-weight:700">Ecosystem completion</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">25%</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">20%</p>
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
             <p class="muted" style="font-size:13px;line-height:21px">Ship the AI App Builder and deepen AI Guest Intelligence on the shared guest identity layer — completing the four-product platform.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <p style="font-size:17px;font-weight:700">Marketing &amp; GTM</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">15%</p>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:15%"></div></div>
+            <p class="muted" style="font-size:13px;line-height:21px">Demand generation and brand, case studies from live locations, trade-show programs, and co-marketing with POS and wholesale partners to lower CAC as the funnel scales.</p>
           </div>
         </div>
         <p class="muted" style="font-size:15px;line-height:26px;margin-top:22px;max-width:72ch">Targets 18–24 months of runway: convert the contracted 460-location pipeline, ship the AI App Builder, and reach the next raise on revenue milestones rather than promises.</p>
