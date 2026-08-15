@@ -42,7 +42,7 @@
     img { max-width: 100%; }
     button { font-family: inherit; }
 
-    .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; margin: 0 0 18px; }
+    .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; margin: 0 0 28px; }
     .headline { font-size: clamp(26px,3.2vw,42px); line-height: 1.12; font-weight: 700; letter-spacing: -0.012em; margin: 0 0 32px; }
     .muted { color: #a39c96; }
     .card {
@@ -169,6 +169,12 @@
     #overview .thumb { margin: 0; }
 
     /* ── Slide-specific bits (design carried over) ────────── */
+    .chip {
+      display: inline-block; padding: 16px 34px; border-radius: 999px;
+      background: linear-gradient(100deg,#ff3d00,#ff9a62); color: #fff;
+      font-size: clamp(16px,1.6vw,21px); font-weight: 700; letter-spacing: -0.01em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 40px rgba(255,80,20,0.5);
+    }
     .stat-num { font-size: clamp(30px,2.9vw,38px); font-weight: 700; letter-spacing: -0.01em; margin: 12px 0 0; background: linear-gradient(120deg,#fff 30%,#ffb07a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     th { text-align: left; padding: 14px 16px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #78716c; border-bottom: 1px solid rgba(255,255,255,0.08); }
@@ -283,7 +289,7 @@
   <main id="deck">
 
     <!-- 1 · Title -->
-    <section class="slide" data-label="Title">
+    <section class="slide" data-label="Introduction">
       <div class="inner">
         <div class="anim">
           <img src="bytes-wordmark.png" alt="Bytes" style="height:56px;width:auto;display:block">
@@ -297,7 +303,6 @@
     <section class="slide" data-label="Live demos">
       <div class="inner">
         <p class="kicker">Try it right now</p>
-        <h2 class="headline" style="max-width:26ch">Don’t take our word for it. The product answers.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:900px">
           <div class="card" style="display:flex;flex-direction:column;gap:16px">
             <p class="cardkick">AI Hostess · Call the live demo</p>
@@ -336,7 +341,6 @@
     <section class="slide" data-label="Problem">
       <div class="inner">
         <p class="kicker">The problem</p>
-        <h2 class="headline" style="max-width:26ch">Every channel leaks revenue. None of them talk to each other.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="card" style="display:flex;flex-direction:column;gap:14px">
             <p class="cardkick">Calls go unanswered</p>
@@ -362,7 +366,6 @@
     <section class="slide" data-label="Product">
       <div class="inner">
         <p class="kicker">Product &amp; revenue model</p>
-        <h2 class="headline" style="max-width:26ch">Four products, one ordering and guest layer.</h2>
         <div class="card stack-table anim" style="padding:8px 26px;overflow-x:auto">
           <table>
             <thead><tr><th>Product</th><th>Description</th><th style="white-space:nowrap">Price / mo</th><th style="text-align:right">Status</th></tr></thead>
@@ -411,7 +414,6 @@
     <section class="slide" data-label="Traction">
       <div class="inner">
         <p class="kicker">Traction</p>
-        <h2 class="headline">Live, growing, and already monetizing.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
           <div class="card"><p class="cardkick">Revenue</p><p class="stat-num">$50K</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">MRR plus $15K platform fees, on $500K monthly GMV</p></div>
           <div class="card"><p class="cardkick">Locations</p><p class="stat-num">460</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Contracted locations across 45+ brands (rolling plan)</p></div>
@@ -425,7 +427,6 @@
     <section class="slide" data-label="Why now">
       <div class="inner">
         <p class="kicker">Why now</p>
-        <h2 class="headline">Three shifts converging on the same window.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="card">
             <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">01</p>
@@ -450,7 +451,6 @@
     <section class="slide" data-label="Market">
       <div class="inner">
         <p class="kicker">Market</p>
-        <h2 class="headline" style="max-width:28ch">15,000 locations in 5 years — won brand by brand.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
           <div class="card" style="padding:28px;display:flex;flex-direction:column"><p class="cardkick">Market size</p><p style="font-size:32px;font-weight:700;letter-spacing:-0.01em;white-space:nowrap;margin-top:12px">$49B</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:auto;padding-top:10px">Restaurant AI market by 2029</p></div>
           <div class="card" style="padding:28px;display:flex;flex-direction:column"><p class="cardkick">Restaurants</p><p style="font-size:32px;font-weight:700;letter-spacing:-0.01em;white-space:nowrap;margin-top:12px">800K</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:auto;padding-top:10px">Restaurants in the US &amp; Canada</p></div>
@@ -465,7 +465,6 @@
     <section class="slide" data-label="Competition">
       <div class="inner">
         <p class="kicker">Competitive landscape</p>
-        <h2 class="headline" style="max-width:26ch">Everyone else answers the phone. Bytes owns the guest.</h2>
         <div class="card stack-table anim" style="padding:8px 26px;overflow-x:auto">
           <table>
             <thead><tr><th>Company</th><th>What they sell</th><th style="white-space:nowrap">Pricing</th><th>The gap</th></tr></thead>
@@ -511,7 +510,6 @@
     <section class="slide" data-label="Moat">
       <div class="inner">
         <p class="kicker">The moat</p>
-        <h2 class="headline" style="max-width:28ch">Why this gets harder to displace every month.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
           <div class="card">
             <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">01</p>
@@ -536,7 +534,6 @@
     <section class="slide" data-label="Distribution">
       <div class="inner">
         <p class="kicker">Distribution advantage</p>
-        <h2 class="headline" style="max-width:24ch">A direct funnel to 6,000+ restaurant owners.</h2>
         <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,140,80,0.16);border:1px solid rgba(255,140,80,0.16);border-radius:18px;overflow:hidden">
           <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:28px"><p class="cardkick">Wholesaler’s active customers</p><p style="font-size:38px;font-weight:700;letter-spacing:-0.01em;margin-top:12px">5,000+</p></div>
           <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:28px"><p class="cardkick">Wholesale locations</p><p style="font-size:38px;font-weight:700;letter-spacing:-0.01em;margin-top:12px">4 booths</p></div>
@@ -550,7 +547,6 @@
     <section class="slide" data-label="The raise">
       <div class="inner">
         <p class="kicker">The raise</p>
-        <h2 class="headline" style="max-width:24ch">Raising a $2.5M seed SAFE.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
           <div class="card" style="padding:28px"><p class="cardkick">Pre-seed SAFE · Deployed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$900K</p></div>
           <div class="card" style="padding:28px"><p class="cardkick">Seed SAFE · Committed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$1.5M</p></div>
@@ -565,7 +561,6 @@
     <section class="slide" data-label="Use of funds">
       <div class="inner">
         <p class="kicker">Use of funds</p>
-        <h2 class="headline" style="max-width:24ch">Where the $2.5M goes.</h2>
         <div class="card anim" style="padding:32px 28px;display:flex;flex-direction:column;gap:26px">
           <div style="display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
@@ -608,7 +603,6 @@
     <section class="slide" data-label="Team">
       <div class="inner">
         <p class="kicker">Founding team</p>
-        <h2 class="headline">Operators who lived the problem.</h2>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
           <div class="card" style="padding:24px">
             <p style="font-size:17px;font-weight:700">Moe M.</p>
@@ -638,8 +632,8 @@
     <section class="slide" data-label="Close">
       <div class="inner">
         <div style="background:radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255,90,30,0.22), transparent 70%), linear-gradient(170deg, rgba(255,255,255,0.03), rgba(255,120,60,0.04));border:1px solid rgba(255,140,80,0.2);border-radius:24px;padding:clamp(48px,6vw,88px) 32px;text-align:center">
-          <p class="kicker" style="margin-bottom:24px">Seed round · SAFE note</p>
-          <h3 style="font-size:clamp(34px,4.4vw,54px);line-height:1.1;font-weight:700;letter-spacing:-0.015em">$1.5M committed. $2.5M open.</h3>
+          <p class="kicker" style="margin-bottom:28px">Seed round · SAFE note</p>
+          <span class="chip">$1.5M committed · $2.5M SAFE allocation open</span>
           <p class="muted" style="font-size:16px;line-height:27px;max-width:56ch;margin:24px auto 0">Bytes AI is raising the remaining allocation to scale its marketing and sales engine, convert the signed rollout pipeline, and complete the four-product platform.</p>
           <p style="font-size:15px;font-weight:700;margin-top:28px"><a href="mailto:Moe@trybytes.ai?subject=Bytes%20AI%20Seed%20Round">Investor contact · Moe@trybytes.ai</a></p>
         </div>
