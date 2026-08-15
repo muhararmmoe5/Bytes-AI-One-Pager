@@ -101,10 +101,10 @@
     .cbtn svg { width: 17px; height: 17px; display: block; }
 
     /* view-toggle icon states: fullscreen on desktop machines, phone/desktop swap on phones */
-    .ic-phone, .ic-desktop { display: none; }
-    body.is-phone .ic-fs { display: none; }
-    body.is-phone.forced-desktop .ic-phone { display: block; }
-    body.is-phone:not(.forced-desktop) .ic-desktop { display: block; }
+    #btn-fs .ic-phone, #btn-fs .ic-desktop { display: none; }
+    body.is-phone #btn-fs .ic-fs { display: none; }
+    body.is-phone.forced-desktop #btn-fs .ic-phone { display: block; }
+    body.is-phone:not(.forced-desktop) #btn-fs .ic-desktop { display: block; }
 
     /* one-time hint pill; scaled up when shown inside the 1280px desktop layout */
     #hint {
@@ -254,8 +254,9 @@
       }
     }
 
-    /* ── Print → each slide becomes one dark 16:10 PDF page ── */
-    @page { size: 1280px 800px; margin: 0; }
+    /* ── Print → one dark page per slide at the standard 16:9
+         presentation size (13.33 × 7.5 in, same as PowerPoint) ── */
+    @page { size: 13.333in 7.5in; margin: 0; }
     @media print {
       * {
         -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
@@ -270,7 +271,7 @@
         position: static !important; inset: auto !important; width: 100%; height: 100vh;
         opacity: 1 !important; visibility: visible !important; transform: none !important;
         overflow: hidden; page-break-after: always; break-after: page; break-inside: avoid;
-        padding: 48px 56px; display: flex;
+        padding: 42px 56px; display: flex;
         background:
           radial-gradient(ellipse 60% 45% at 75% -5%, rgba(255,80,20,0.26), transparent 65%),
           radial-gradient(ellipse 45% 35% at 8% 45%, rgba(255,120,60,0.12), transparent 70%),
@@ -278,10 +279,10 @@
           #060504 !important;
       }
       .slide:last-of-type { page-break-after: auto; }
-      .slide .inner { margin: auto; zoom: 0.82; }
+      .slide .inner { margin: auto; zoom: 0.72; }
       /* dense table slides need a smaller scale to fit one page */
       .slide[data-label="Product"] .inner,
-      .slide[data-label="Competition"] .inner { zoom: 0.7; }
+      .slide[data-label="Competition"] .inner { zoom: 0.62; }
       .slide .anim > * { animation: none !important; opacity: 1 !important; }
       .slide .bar-fill { animation: none !important; }
       .stat-num { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #ffb07a; color: #ffb07a; }
