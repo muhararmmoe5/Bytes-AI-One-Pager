@@ -253,13 +253,13 @@
         overflow: hidden; page-break-after: always; break-inside: avoid;
         padding: 48px 56px; display: flex;
         background:
-          radial-gradient(ellipse 55% 40% at 78% -5%, rgba(255,80,20,0.14), transparent 65%),
-          radial-gradient(ellipse 50% 40% at 8% 100%, rgba(255,60,0,0.07), transparent 70%),
+          radial-gradient(ellipse 60% 45% at 75% -5%, rgba(255,80,20,0.26), transparent 65%),
+          radial-gradient(ellipse 45% 35% at 8% 45%, rgba(255,120,60,0.12), transparent 70%),
+          radial-gradient(ellipse 55% 45% at 88% 95%, rgba(255,60,0,0.16), transparent 70%),
           #060504 !important;
       }
       .slide:last-of-type { page-break-after: auto; }
-      .slide { display: block; }
-      .slide .inner { margin: 0 auto; zoom: 0.82; }
+      .slide .inner { margin: auto; zoom: 0.82; }
       /* dense table slides need a smaller scale to fit one page */
       .slide[data-label="Product"] .inner,
       .slide[data-label="Competition"] .inner { zoom: 0.7; }
@@ -303,7 +303,7 @@
     <button class="cbtn" id="btn-print" title="Download PDF (P)" aria-label="Download PDF">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
     </button>
-    <button class="cbtn" id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen">
+    <button class="cbtn" id="btn-fs" title="Fullscreen · desktop view on phone (F)" aria-label="Fullscreen or desktop view">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
     </button>
   </header>
@@ -812,9 +812,23 @@
     document.getElementById('ov-close').addEventListener('click', function () {
       document.body.classList.remove('overview-open');
     });
+    /* On phones (no real fullscreen on iOS) this button toggles the full
+       desktop layout instead, scaled into the phone viewport and pinch-zoomable. */
+    var vpMeta = document.querySelector('meta[name="viewport"]');
     document.getElementById('btn-fs').addEventListener('click', function () {
-      if (document.fullscreenElement) document.exitFullscreen();
-      else document.documentElement.requestFullscreen().catch(function () {});
+      if (document.body.classList.contains('forced-desktop')) {
+        document.body.classList.remove('forced-desktop');
+        vpMeta.setAttribute('content', 'width=device-width, initial-scale=1, viewport-fit=cover');
+        if (window.innerWidth < 900) document.body.classList.remove('rail-open');
+      } else if (window.innerWidth < 900) {
+        document.body.classList.add('forced-desktop');
+        document.body.classList.add('rail-open');
+        vpMeta.setAttribute('content', 'width=1280');
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen().catch(function () {});
+      }
     });
 
     /* keyboard */
