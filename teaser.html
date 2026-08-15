@@ -101,6 +101,15 @@ footer{padding:34px 0 46px;text-align:center;font-size:13px;color:#5f5952;line-h
 .gate-fine{font-size:13px;color:var(--dim);line-height:1.5;margin:0}
 .deck-note{font-size:13.5px;color:var(--dim);margin:14px 0 0;line-height:1.5}
 .deck-sent{font-size:15px;font-weight:700;color:var(--accent);margin:26px 0 0}
+/* ---- print ---- */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .glow, .gate { display: none !important; }
+  #site[hidden] { display: block !important; }   /* print the content even if the gate was up */
+  .stat, .member, .action { break-inside: avoid; }
+  h1, h2 { break-after: avoid; }
+  .btn { box-shadow: none !important; }
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
