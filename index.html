@@ -58,17 +58,15 @@
     /* GTM channel rows */
     .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: #a39c96; }
     .lg i { width: 9px; height: 9px; border-radius: 50%; display: block; }
-    .row { display: grid; grid-template-columns: minmax(200px, 0.85fr) 1.7fr; gap: 10px 28px;
-           padding: 13px 0; border-top: 1px solid rgba(255,255,255,0.09); align-items: start; }
+    .ch { display: flex; flex-direction: column; align-items: flex-start; }
     .rt { font-size: 16px; font-weight: 700; line-height: 22px; display: flex; align-items: baseline; gap: 9px; }
     .rn { font-size: 11px; font-weight: 700; color: #ff8a50; font-feature-settings: 'tnum' 1; }
     .proof { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px;
              background: rgba(255,90,30,0.14); border: 1px solid rgba(255,140,80,0.32);
              font-size: 11px; font-weight: 600; color: #ffb07a; }
-    .rc { font-size: 13.5px; line-height: 21px; }
+    .rc { font-size: 13.5px; line-height: 21px; margin-top: 11px; }
     .arw { font-size: 13px; font-weight: 600; color: #ffb07a; margin-top: 7px; }
     .arw::before { content: '→ '; }
-    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
     .grid { display: grid; gap: 16px; }
 
     /* ── Email gate ───────────────────────────────────────── */
@@ -627,74 +625,51 @@
     <!-- 11 · Go-to-market -->
     <section class="slide" data-label="Go-to-market">
       <div class="inner">
-        <p class="kicker" style="margin-bottom:12px">Go-to-market · 460 → 1,500 locations: scale what’s already working</p>
-        <p class="muted" style="font-size:15px;line-height:24px;margin-bottom:20px">Every channel in this plan is already producing. 460 locations closed founder-led — 130 live today, the rest rolling out on each brand’s schedule. The raise turns each proven channel into an engine.</p>
+        <p class="kicker" style="margin-bottom:18px">Go-to-market · 460 → 1,500 locations: scale what’s already working</p>
 
-        <div style="margin-bottom:22px">
+        <div style="margin-bottom:30px">
           <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;box-shadow:0 0 24px rgba(255,80,20,0.25)">
             <div style="width:13%;background:linear-gradient(90deg,#ff3d00,#ff5a1e)"></div>
             <div style="width:30%;background:linear-gradient(90deg,#ff8a50,#ffa06b);border-left:1px solid rgba(6,5,4,0.5)"></div>
             <div style="width:57%;background:linear-gradient(90deg,#ffd0b0,#ffe4d2);border-left:1px solid rgba(6,5,4,0.5)"></div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:12px">
-            <span class="lg"><i style="background:#ff4a12"></i>13% ISO payment processors</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:13px">
+            <span class="lg"><i style="background:#ff4a12"></i>13% ISO processors</span>
             <span class="lg"><i style="background:#ff9560"></i>30% Trade show booths</span>
             <span class="lg"><i style="background:#ffdac2"></i>57% Direct sales &amp; referrals</span>
-            <span class="lg" style="color:#78716c">Source of the 460 locations closed to date</span>
+            <span class="lg" style="color:#78716c">Where the 460 signed locations came from — every channel already producing</span>
           </div>
         </div>
 
-        <div class="anim">
-          <div class="row">
-            <div>
-              <p class="rt"><span class="rn">01</span>ISO reseller program</p>
-              <span class="proof">Already 13% of locations · 16+ ISOs in pipeline</span>
-            </div>
-            <div>
-              <p class="muted rc">ISOs send us leads today with no formal program. We formalize it: go payment-agnostic so any ISO can bundle Bytes, with each reseller connecting 120 accounts a year to keep partner status.</p>
-              <p class="arw">Just 8 of the 16 interested ISOs hitting quota ≈ 1,000 accounts a year</p>
-            </div>
+        <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:30px 40px">
+          <div class="ch">
+            <p class="rt"><span class="rn">01</span>ISO reseller program</p>
+            <span class="proof">13% today · 16+ ISOs in pipeline</span>
+            <p class="muted rc">Formalize what ISOs already send us: payment-agnostic bundling, 120 accounts a year per reseller. Eight at quota ≈ 1,000 accounts a year.</p>
           </div>
-          <div class="row">
-            <div>
-              <p class="rt"><span class="rn">02</span>Trade show booths</p>
-              <span class="proof">Already 30% — best-converting channel</span>
-            </div>
-            <div>
-              <p class="muted rc">Industry-show booths are our highest-converting source. We double down: more shows, more markets, a dedicated booth team.</p>
-            </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">02</span>Trade show booths</p>
+            <span class="proof">30% · best-converting channel</span>
+            <p class="muted rc">Double down on our strongest source: more shows, more markets, a dedicated booth team.</p>
           </div>
-          <div class="row">
-            <div>
-              <p class="rt"><span class="rn">03</span>Wholesale distribution</p>
-              <span class="proof">Strategic investor · 8,000 owners · 4 booths</span>
-            </div>
-            <div>
-              <p class="muted rc">Revenue-share partnership: the wholesaler earns on every account closed through his network, and owners who adopt earn back three months of software cost as wholesale spending credits.</p>
-              <p class="arw">Aligned incentives on both sides of the counter — replicable with more wholesalers</p>
-            </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">03</span>Wholesale distribution</p>
+            <span class="proof">Strategic investor · 8,000 owners</span>
+            <p class="muted rc">Revenue share for the wholesaler; owners who adopt earn back three months of software in wholesale credits.</p>
           </div>
-          <div class="row">
-            <div>
-              <p class="rt"><span class="rn">04</span>Direct sales &amp; referrals</p>
-              <span class="proof">Already 57% — all founder-led</span>
-            </div>
-            <div>
-              <p class="muted rc">Codify the founder playbook into a repeatable market launch: street reps in dense markets, paid acquisition in large metros, referrals compounding inside owner networks.</p>
-            </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">04</span>Direct sales &amp; referrals</p>
+            <span class="proof">57% · all founder-led</span>
+            <p class="muted rc">Codify the founder playbook: street reps in dense markets, paid acquisition in metros, referrals inside owner networks.</p>
           </div>
-          <div class="row">
-            <div>
-              <p class="rt"><span class="rn">05</span>Chef &amp; influencer partnerships</p>
-              <span class="proof">Top of funnel</span>
-            </div>
-            <div>
-              <p class="muted rc">Trusted operator voices drive low-cost demand that feeds every channel above.</p>
-            </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">05</span>Chef &amp; influencer partners</p>
+            <span class="proof">Top of funnel</span>
+            <p class="muted rc">Trusted operator voices generate low-cost demand that feeds every channel above.</p>
           </div>
         </div>
 
-        <p style="font-size:14px;line-height:22px;font-weight:500;color:#c9beb6;border-top:1px solid rgba(255,140,80,0.28);padding-top:16px;margin-top:6px"><b style="color:#ffb07a">Bottom line:</b> 460 locations with zero sales team and no formal channel programs. This raise systematizes what’s already converting.</p>
+        <p style="font-size:14px;line-height:22px;font-weight:500;color:#c9beb6;border-top:1px solid rgba(255,140,80,0.28);padding-top:18px;margin-top:30px"><b style="color:#ffb07a">Bottom line:</b> 460 locations with zero sales team and no formal channel programs. This raise systematizes what’s already converting.</p>
       </div>
     </section>
 
