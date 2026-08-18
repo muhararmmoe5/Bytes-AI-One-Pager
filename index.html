@@ -55,6 +55,20 @@
     .bul { position: relative; padding-left: 15px; font-size: 13px; line-height: 20px; color: #a39c96; margin: 0 0 8px; }
     .bul:last-child { margin-bottom: 0; }
     .bul::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #ff8a50; }
+    /* GTM channel rows */
+    .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: #a39c96; }
+    .lg i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .row { display: grid; grid-template-columns: minmax(200px, 0.85fr) 1.7fr; gap: 10px 28px;
+           padding: 13px 0; border-top: 1px solid rgba(255,255,255,0.09); align-items: start; }
+    .rt { font-size: 16px; font-weight: 700; line-height: 22px; display: flex; align-items: baseline; gap: 9px; }
+    .rn { font-size: 11px; font-weight: 700; color: #ff8a50; font-feature-settings: 'tnum' 1; }
+    .proof { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px;
+             background: rgba(255,90,30,0.14); border: 1px solid rgba(255,140,80,0.32);
+             font-size: 11px; font-weight: 600; color: #ffb07a; }
+    .rc { font-size: 13.5px; line-height: 21px; }
+    .arw { font-size: 13px; font-weight: 600; color: #ffb07a; margin-top: 7px; }
+    .arw::before { content: '→ '; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
     .grid { display: grid; gap: 16px; }
 
     /* ── Email gate ───────────────────────────────────────── */
@@ -479,7 +493,7 @@
         <p class="kicker">Traction</p>
         <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
           <div class="card"><p class="cardkick">Revenue</p><p class="stat-num">$50K</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">MRR plus $15K platform fees, on $500K monthly GMV</p></div>
-          <div class="card"><p class="cardkick">Locations</p><p class="stat-num">460</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Signed with 45+ multi-location brands — first locations live, the rest on a scheduled rollout</p></div>
+          <div class="card"><p class="cardkick">Locations</p><p class="stat-num">460</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">130 live today; the rest signed across 45+ multi-location brands, rolling out on each brand’s schedule</p></div>
           <div class="card"><p class="cardkick">Calls</p><p class="stat-num">70,000+</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Handled per month</p></div>
           <div class="card"><p class="cardkick">Growth</p><p class="stat-num">38%</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Monthly revenue growth</p></div>
           <div class="card"><p class="cardkick">Churn</p><p class="stat-num">5%</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Location churn across live accounts</p></div>
@@ -613,41 +627,74 @@
     <!-- 11 · Go-to-market -->
     <section class="slide" data-label="Go-to-market">
       <div class="inner">
-        <p class="kicker" style="margin-bottom:14px">Go-to-market · The path to 1,500 locations</p>
-        <p class="muted" style="font-size:15px;line-height:24px;margin-bottom:22px">Three motions compound: partner-led distribution, a repeatable direct sales playbook, and community-led demand.</p>
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;background:linear-gradient(100deg, rgba(255,90,30,0.16), rgba(255,140,80,0.05) 70%);border:1px solid rgba(255,140,80,0.35);border-radius:16px;padding:18px 24px;margin-bottom:20px">
-          <div>
-            <p class="cardkick">Target capacity</p>
-            <p style="font-size:26px;font-weight:700;letter-spacing:-0.01em;margin-top:4px">1,920 accounts / year</p>
+        <p class="kicker" style="margin-bottom:12px">Go-to-market · 460 → 1,500 locations: scale what’s already working</p>
+        <p class="muted" style="font-size:15px;line-height:24px;margin-bottom:20px">Every channel in this plan is already producing. 460 locations closed founder-led — 130 live today, the rest rolling out on each brand’s schedule. The raise turns each proven channel into an engine.</p>
+
+        <div style="margin-bottom:22px">
+          <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;box-shadow:0 0 24px rgba(255,80,20,0.25)">
+            <div style="width:13%;background:linear-gradient(90deg,#ff3d00,#ff5a1e)"></div>
+            <div style="width:30%;background:linear-gradient(90deg,#ff8a50,#ffa06b);border-left:1px solid rgba(6,5,4,0.5)"></div>
+            <div style="width:57%;background:linear-gradient(90deg,#ffd0b0,#ffe4d2);border-left:1px solid rgba(6,5,4,0.5)"></div>
           </div>
-          <p class="muted" style="font-size:13px;line-height:20px;max-width:62ch;margin:0">From ISO resellers alone once the partner program launches — 16 ISOs × 120 accounts each, before direct sales adds a single location.</p>
-        </div>
-        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-          <div class="card" style="padding:22px">
-            <p class="cardkick">Partner program · ISOs</p>
-            <p style="font-size:17px;font-weight:700;margin:10px 0 12px">16+ ISOs already interested</p>
-            <p class="bul">Each ISO commits to 120 accounts a year to keep reseller status</p>
-            <p class="bul">Bytes goes payment-agnostic, so any ISO can resell on top of its own processing</p>
-          </div>
-          <div class="card" style="padding:22px">
-            <p class="cardkick">Partner program · Booths</p>
-            <p style="font-size:17px;font-weight:700;margin:10px 0 12px">8,000 owners in reach</p>
-            <p class="bul">Owners who sign get three months of Bytes fees back as wholesale spending credits</p>
-            <p class="bul">Structured across four booths with our wholesale strategic investor</p>
-          </div>
-          <div class="card" style="padding:22px">
-            <p class="cardkick">Direct sales &amp; marketing</p>
-            <p style="font-size:17px;font-weight:700;margin:10px 0 12px">Market-launch playbook</p>
-            <p class="bul">Feet-on-the-street reps in compact markets, paid acquisition in large metros</p>
-            <p class="bul">Referral program that compounds inside owner networks</p>
-          </div>
-          <div class="card" style="padding:22px">
-            <p class="cardkick">Community</p>
-            <p style="font-size:17px;font-weight:700;margin:10px 0 12px">Chef &amp; creator partnerships</p>
-            <p class="bul">Chefs and food creators introduce Bytes to their operator audiences</p>
-            <p class="bul">Low-cost top of funnel that warms both direct and partner channels</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:12px">
+            <span class="lg"><i style="background:#ff4a12"></i>13% ISO payment processors</span>
+            <span class="lg"><i style="background:#ff9560"></i>30% Trade show booths</span>
+            <span class="lg"><i style="background:#ffdac2"></i>57% Direct sales &amp; referrals</span>
+            <span class="lg" style="color:#78716c">Source of the 460 locations closed to date</span>
           </div>
         </div>
+
+        <div class="anim">
+          <div class="row">
+            <div>
+              <p class="rt"><span class="rn">01</span>ISO reseller program</p>
+              <span class="proof">Already 13% of locations · 16+ ISOs in pipeline</span>
+            </div>
+            <div>
+              <p class="muted rc">ISOs send us leads today with no formal program. We formalize it: go payment-agnostic so any ISO can bundle Bytes, with each reseller connecting 120 accounts a year to keep partner status.</p>
+              <p class="arw">Just 8 of the 16 interested ISOs hitting quota ≈ 1,000 accounts a year</p>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class="rt"><span class="rn">02</span>Trade show booths</p>
+              <span class="proof">Already 30% — best-converting channel</span>
+            </div>
+            <div>
+              <p class="muted rc">Industry-show booths are our highest-converting source. We double down: more shows, more markets, a dedicated booth team.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class="rt"><span class="rn">03</span>Wholesale distribution</p>
+              <span class="proof">Strategic investor · 8,000 owners · 4 booths</span>
+            </div>
+            <div>
+              <p class="muted rc">Revenue-share partnership: the wholesaler earns on every account closed through his network, and owners who adopt earn back three months of software cost as wholesale spending credits.</p>
+              <p class="arw">Aligned incentives on both sides of the counter — replicable with more wholesalers</p>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class="rt"><span class="rn">04</span>Direct sales &amp; referrals</p>
+              <span class="proof">Already 57% — all founder-led</span>
+            </div>
+            <div>
+              <p class="muted rc">Codify the founder playbook into a repeatable market launch: street reps in dense markets, paid acquisition in large metros, referrals compounding inside owner networks.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <p class="rt"><span class="rn">05</span>Chef &amp; influencer partnerships</p>
+              <span class="proof">Top of funnel</span>
+            </div>
+            <div>
+              <p class="muted rc">Trusted operator voices drive low-cost demand that feeds every channel above.</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:14px;line-height:22px;font-weight:500;color:#c9beb6;border-top:1px solid rgba(255,140,80,0.28);padding-top:16px;margin-top:6px"><b style="color:#ffb07a">Bottom line:</b> 460 locations with zero sales team and no formal channel programs. This raise systematizes what’s already converting.</p>
       </div>
     </section>
 
