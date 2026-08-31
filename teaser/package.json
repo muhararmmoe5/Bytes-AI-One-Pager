@@ -1,0 +1,12 @@
+{
+  "name": "bytes-ai-teaser-deck",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bytes AI Teaser Deck — gated 10-slide teaser closing on a full-deck request form (static site).",
+  "scripts": {
+    "start": "serve . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}

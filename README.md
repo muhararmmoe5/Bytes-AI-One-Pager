@@ -7,19 +7,17 @@ Static site, no build step. Railway's Railpack builder auto-detects index.html a
 2. In Railway: New Project -> Deploy from GitHub repo (or CLI upload).
 3. Once deployed, open Settings -> Networking -> Generate Domain (or attach your own, e.g. invest.trybytes.ai via a CNAME).
 
-## Versions
-| File | Served at | What it is |
+## Two sites in this repo
+| Folder | Deployed as | What it is |
 | --- | --- | --- |
-| `index.html` | `/` | The full 15-slide investor deck. Unchanged. |
-| `v2.html` | `/v2.html` | **Bytes AI Teaser Deck** — 10 slides, ending in a "request the full pitch deck" form. |
+| repo root | the existing project (`index.html`) | The full 15-slide investor deck. Unchanged. |
+| `teaser/` | its own project, Root Directory `teaser` | **Bytes AI Teaser Deck** — 10 slides closing on a "request the full pitch deck" form. See [teaser/README.md](teaser/README.md). |
 
-The teaser drops the competition, go-to-market, raise, use-of-funds and team
-slides, and has no PDF download button: the full deck is what the last slide
-asks people to request.
+They deploy independently: the root project serves the full deck, and a
+second project pointed at `teaser/` serves the teaser on its own domain.
 
 ## Notes
 - No server code needed; everything (fonts, logo, styles) is embedded in each page.
-- `index.html` stores gate emails in the visitor's browser only.
-- `v2.html` logs both the gate unlock and the full-deck request to a Google
-  Sheet once `CAPTURE_ENDPOINT` is filled in — see [SHEETS-SETUP.md](SHEETS-SETUP.md).
-  Until then it still keeps every capture in the visitor's `localStorage`.
+- The root `index.html` stores gate emails in the visitor's browser only.
+- The teaser logs both its gate unlock and its full-deck request to a Google
+  Sheet — see [teaser/SHEETS-SETUP.md](teaser/SHEETS-SETUP.md).
