@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bytes AI — Investor Deck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Bytes AI is the AI ordering and guest platform for restaurants — agents that capture every order, remember every guest, and bring every one back.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="bytes-logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deck.trybytes.ai/">
+  <meta property="og:title" content="Bytes AI — Investor Deck">
+  <meta property="og:description" content="AI ordering agents for restaurants.">
+  <meta property="og:image" content="https://deck.trybytes.ai/bytes-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bytes AI — Investor Deck">
+  <meta name="twitter:description" content="AI ordering agents for restaurants.">
+  <meta name="twitter:image" content="https://deck.trybytes.ai/bytes-og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Base ─────────────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: #060504; color: #f5f2ef; font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased; text-wrap: pretty; overflow: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 40% at 75% -5%, rgba(255,80,20,0.16), transparent 65%),
+        radial-gradient(ellipse 45% 35% at 10% 40%, rgba(255,120,60,0.07), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(255,60,0,0.08), transparent 70%);
+    }
+    a { color: #ff8a50; text-decoration: none; }
+    a:hover { color: #ffb08a; }
+    ::placeholder { color: #6f6862; }
+    img { max-width: 100%; }
+    button { font-family: inherit; }
+
+    .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; margin: 0 0 28px; }
+    .headline { font-size: clamp(26px,3.2vw,42px); line-height: 1.12; font-weight: 700; letter-spacing: -0.012em; margin: 0 0 32px; }
+    .muted { color: #a39c96; }
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02) 45%, rgba(255,90,30,0.1));
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -30px 60px rgba(255,80,20,0.05), 0 20px 50px rgba(0,0,0,0.45);
+      padding: 26px;
+    }
+    .cardkick { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; margin: 0; }
+    .bul { position: relative; padding-left: 15px; font-size: 13px; line-height: 20px; color: #a39c96; margin: 0 0 8px; }
+    .bul:last-child { margin-bottom: 0; }
+    .bul::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #ff8a50; }
+    /* GTM channel rows */
+    .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: #a39c96; }
+    .lg i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .ch { display: flex; flex-direction: column; align-items: flex-start; }
+    .rt { font-size: 16px; font-weight: 700; line-height: 22px; display: flex; align-items: baseline; gap: 9px; }
+    .rn { font-size: 11px; font-weight: 700; color: #ff8a50; font-feature-settings: 'tnum' 1; }
+    .proof { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px;
+             background: rgba(255,90,30,0.14); border: 1px solid rgba(255,140,80,0.32);
+             font-size: 11px; font-weight: 600; color: #ffb07a; }
+    .rc { font-size: 13.5px; line-height: 21px; margin-top: 11px; }
+    .arw { font-size: 13px; font-weight: 600; color: #ffb07a; margin-top: 7px; }
+    .arw::before { content: '→ '; }
+    .grid { display: grid; gap: 16px; }
+
+    /* ── Email gate ───────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 24px;
+      background: radial-gradient(ellipse 60% 50% at 50% 45%, rgba(255,90,30,0.2), transparent 70%),
+                  radial-gradient(ellipse 40% 30% at 15% 90%, rgba(255,120,60,0.08), transparent 70%), #060504;
+    }
+    body.unlocked #gate { display: none; }
+    #gate form {
+      width: min(440px,100%);
+      background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03) 45%, rgba(255,90,30,0.1));
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 26px; backdrop-filter: blur(18px);
+      padding: 48px 44px; display: flex; flex-direction: column; gap: 24px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 0 100px rgba(255,90,30,0.18), 0 30px 70px rgba(0,0,0,0.5);
+    }
+    #gate h1 { font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; text-align: center; }
+    #gate label { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; }
+    #gate input {
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px; padding: 16px 22px; font-size: 15px; font-family: inherit; color: #f5f2ef; outline: none;
+    }
+    .btn-primary {
+      width: 100%; border: 0; border-radius: 999px; padding: 16px 22px; font-size: 15px; font-weight: 700;
+      color: #1a0c05; background: linear-gradient(100deg,#ff3d00 0%,#ff9a62 60%,#ffc09a 100%); cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 36px rgba(255,80,20,0.45);
+    }
+
+    /* ── Chrome (top bar) ─────────────────────────────────── */
+    #chrome {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+      display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+      background: linear-gradient(180deg, rgba(6,5,4,0.85), rgba(6,5,4,0));
+      transition: left .28s cubic-bezier(.2,.7,.2,1);
+    }
+    body.rail-open #chrome { left: 216px; }
+    @media (max-width: 900px) { body.rail-open #chrome { left: 0; } }
+    #chrome .logo { height: 26px; width: auto; display: block; }
+    #chrome .conf { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; margin-left: 6px; }
+    #chrome .spacer { margin-left: auto; }
+    .cbtn {
+      width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
+      color: #c9beb6; backdrop-filter: blur(12px); transition: all .15s;
+    }
+    .cbtn:hover { background: rgba(255,140,80,0.14); color: #ffb07a; border-color: rgba(255,140,80,0.35); }
+    .cbtn svg { width: 17px; height: 17px; display: block; }
+
+    /* view-toggle icon states: fullscreen on desktop machines, phone/desktop swap on phones */
+    #btn-fs .ic-phone, #btn-fs .ic-desktop { display: none; }
+    body.is-phone #btn-fs .ic-fs { display: none; }
+    body.is-phone.forced-desktop #btn-fs .ic-phone { display: block; }
+    body.is-phone:not(.forced-desktop) #btn-fs .ic-desktop { display: block; }
+
+    /* one-time hint pill; scaled up when shown inside the 1280px desktop layout */
+    #hint {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 46;
+      background: rgba(10,8,6,0.85); border: 1px solid rgba(255,140,80,0.35); border-radius: 999px;
+      backdrop-filter: blur(16px); box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,80,20,0.15);
+      color: #ffb07a; font-size: 13px; font-weight: 600; font-family: inherit;
+      padding: 12px 22px; cursor: pointer; max-width: 92vw; white-space: nowrap;
+      opacity: 0; visibility: hidden; transition: opacity .35s, visibility 0s .35s;
+    }
+    body.hint-show #hint { opacity: 1; visibility: visible; transition-delay: 0s; }
+    body.forced-desktop #hint { font-size: 34px; padding: 30px 54px; bottom: 190px; border-width: 2px; }
+
+    #progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 45; background: rgba(255,255,255,0.05); }
+    #progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg,#ff3d00,#ff9a62); transition: width .35s cubic-bezier(.2,.7,.2,1); box-shadow: 0 0 12px rgba(255,80,20,0.7); }
+
+    /* ── Thumbnail rail ───────────────────────────────────── */
+    #rail {
+      position: fixed; top: 0; bottom: 0; left: 0; width: 216px; z-index: 42;
+      padding: 64px 12px 20px; overflow-y: auto; overscroll-behavior: contain;
+      background: rgba(10,8,6,0.72); border-right: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+      transform: translateX(-100%); transition: transform .28s cubic-bezier(.2,.7,.2,1);
+      scrollbar-width: thin; scrollbar-color: rgba(255,140,80,0.3) transparent;
+    }
+    body.rail-open #rail { transform: none; }
+    .thumb {
+      display: block; width: 100%; text-align: left; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; cursor: pointer;
+      padding: 0; margin-bottom: 12px; overflow: hidden; position: relative; transition: border-color .15s;
+    }
+    .thumb:hover { border-color: rgba(255,140,80,0.4); }
+    .thumb.active { border-color: #ff7a3d; box-shadow: 0 0 0 1px #ff7a3d, 0 6px 24px rgba(255,80,20,0.25); }
+    .thumb-viewport { width: 100%; aspect-ratio: 1280/800; overflow: hidden; position: relative; background: #060504; }
+    .thumb-canvas { width: 1280px; height: 800px; transform-origin: 0 0; position: absolute; top: 0; left: 0; pointer-events: none; display: flex; align-items: center; }
+    .thumb-canvas .inner { margin: auto; width: 100%; }
+    .thumb-canvas * { backdrop-filter: none !important; animation: none !important; }
+    .thumb .tmeta { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .thumb .tn { font-size: 10px; font-weight: 700; color: #ff8a50; font-feature-settings: 'tnum' 1; }
+    .thumb .tl { font-size: 11px; font-weight: 500; color: #a39c96; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── Deck & slides ────────────────────────────────────── */
+    #deck { position: fixed; inset: 0; z-index: 1; transition: left .28s cubic-bezier(.2,.7,.2,1); touch-action: pan-y; }
+    body.rail-open #deck { left: 216px; }
+    .slide {
+      position: absolute; inset: 0; display: flex; overflow-y: auto; overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      padding: 76px clamp(20px,4.5vw,64px) 84px;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s ease, visibility 0s .3s;
+    }
+    .slide.active {
+      opacity: 1; visibility: visible; transition-delay: 0s; z-index: 2;
+      animation: slide-in-fwd .38s cubic-bezier(.2,.7,.2,1);
+    }
+    .slide.active.back { animation-name: slide-in-back; }
+    @keyframes slide-in-fwd { from { transform: translateX(34px); } to { transform: none; } }
+    @keyframes slide-in-back { from { transform: translateX(-34px); } to { transform: none; } }
+    .inner { margin: auto; width: 100%; max-width: 1240px; position: relative; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .slide.active .anim > * { animation: rise .55s cubic-bezier(.2,.7,.2,1) both; }
+    .slide.active .anim > *:nth-child(2) { animation-delay: .08s; }
+    .slide.active .anim > *:nth-child(3) { animation-delay: .16s; }
+    .slide.active .anim > *:nth-child(4) { animation-delay: .24s; }
+    .slide.active .anim > *:nth-child(5) { animation-delay: .32s; }
+
+    /* ── HUD (bottom nav) ─────────────────────────────────── */
+    #hud {
+      position: fixed; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); z-index: 44;
+      display: flex; align-items: center; gap: 4px; padding: 6px;
+      background: rgba(10,8,6,0.72); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      backdrop-filter: blur(16px); box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+      transition: left .28s cubic-bezier(.2,.7,.2,1);
+    }
+    body.rail-open #hud { left: calc(50% + 108px); }
+    #hud .cbtn { border: 0; background: transparent; }
+    #hud .count { font-size: 13px; font-weight: 600; color: #c9beb6; padding: 0 14px; font-feature-settings: 'tnum' 1; white-space: nowrap; }
+    #hud .count b { color: #ffb07a; }
+
+    /* ── Overview grid ────────────────────────────────────── */
+    #overview {
+      position: fixed; inset: 0; z-index: 50; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain; padding: 72px clamp(16px,4vw,56px) 48px;
+      background: rgba(6,5,4,0.94); backdrop-filter: blur(20px);
+      opacity: 0; visibility: hidden; transition: opacity .25s, visibility 0s .25s;
+    }
+    body.overview-open #overview { opacity: 1; visibility: visible; transition-delay: 0s; }
+    body.overview-open #chrome, body.overview-open #hud { opacity: 0; pointer-events: none; }
+    #overview .ogrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 16px; max-width: 1400px; margin: 0 auto; }
+    #overview .thumb { margin: 0; }
+    #ov-close { position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); right: 16px; z-index: 3; }
+
+    /* ── Slide-specific bits (design carried over) ────────── */
+    .chip {
+      display: inline-block; padding: 16px 34px; border-radius: 999px;
+      background: linear-gradient(100deg,#ff3d00,#ff9a62); color: #fff;
+      font-size: clamp(16px,1.6vw,21px); font-weight: 700; letter-spacing: -0.01em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 8px 40px rgba(255,80,20,0.5);
+    }
+    .stat-num { font-size: clamp(30px,2.9vw,38px); font-weight: 700; letter-spacing: -0.01em; margin: 12px 0 0; background: linear-gradient(120deg,#fff 30%,#ffb07a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { text-align: left; padding: 14px 16px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #78716c; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    th:first-child { padding-left: 0; } th:last-child { padding-right: 0; }
+    td { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; color: #a39c96; line-height: 21px; }
+    td:first-child { padding-left: 0; } td:last-child { padding-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    .tname { font-size: 16px; font-weight: 700; color: #f5f2ef; line-height: 23px; margin: 0; }
+    .tsub { font-size: 12px; font-weight: 500; color: #ff8a50; line-height: 18px; margin: 2px 0 0; }
+    .tprice { font-size: 14px; font-weight: 700; color: #f5f2ef; margin: 0; font-feature-settings: 'tnum' 1; white-space: nowrap; }
+    .tpnote { font-size: 12px; font-weight: 500; color: #ff8a50; margin: 2px 0 0; }
+    .badge { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+    .badge.live { background: rgba(255,90,30,0.18); border: 1px solid rgba(255,140,80,0.45); color: #ffb07a; }
+    .badge.dev { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); color: #a39c96; }
+    .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg,#ff3d00,#ff9a62); box-shadow: 0 0 18px rgba(255,80,20,0.5); }
+    .slide.active .bar-fill { animation: grow .9s cubic-bezier(.2,.7,.2,1) both .2s; }
+    @keyframes grow { from { width: 0 !important; } }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      body.rail-open #deck { left: 0; }
+      body.rail-open #hud { left: 50%; }
+      #chrome { z-index: 56; }
+      #rail { z-index: 55; width: 240px; padding-top: calc(64px + env(safe-area-inset-top, 0px)); box-shadow: 30px 0 80px rgba(0,0,0,0.55); }
+      .slide { padding: 66px 18px 100px; }
+    }
+    @media (max-width: 640px) {
+      #chrome { padding: 10px 12px calc(10px) 12px; gap: 8px; padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+      #chrome .conf { display: none; }
+      #chrome .logo { height: 22px; }
+      .cbtn { width: 40px; height: 40px; }
+      #overview { padding: 68px 14px 32px; }
+      #overview .ogrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .thumb .tl { font-size: 10px; }
+      #gate form { padding: 38px 26px; }
+    }
+    @media (max-width: 760px) {
+      .stack-table thead { display: none; }
+      .stack-table table, .stack-table tbody, .stack-table tr, .stack-table td { display: block; width: 100%; }
+      .stack-table tr { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .stack-table tr:last-child { border-bottom: 0; }
+      .stack-table td { padding: 0; border-bottom: 0; white-space: normal; text-align: left; }
+      .stack-table td + td { margin-top: 12px; }
+      .stack-table td[data-col]::before {
+        content: attr(data-col); display: block; font-size: 11px; font-weight: 600;
+        letter-spacing: 0.14em; text-transform: uppercase; color: #78716c; margin-bottom: 4px;
+      }
+    }
+
+    /* ── Print → one dark page per slide at the standard 16:9
+         presentation size (13.33 × 7.5 in, same as PowerPoint) ── */
+    @page { size: 13.333in 7.5in; margin: 0; }
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+        box-shadow: none !important; backdrop-filter: none !important;
+        animation: none !important; transition: none !important;
+      }
+      html, body { overflow: visible !important; height: auto !important; background: #060504 !important; }
+      body::before { display: none; }
+      #chrome, #rail, #hud, #progress, #overview, #gate, #hint { display: none !important; }
+      #deck { position: static !important; inset: auto !important; }
+      .slide {
+        position: static !important; inset: auto !important;
+        /* scale the whole slide and inflate its canvas so the scaled result
+           exactly fills one page — keeps flex centering true */
+        /* page = 13.333in × 7.5in = 1280 × 720 CSS px; every slide's content
+           fits that at natural size, so no scaling — 1px slack for rounding */
+        width: 100%; height: 719px;
+        opacity: 1 !important; visibility: visible !important; transform: none !important;
+        overflow: hidden; page-break-after: always; break-after: page; break-inside: avoid;
+        padding: 48px 64px;
+        /* the paginator strips flex auto-margins and table-cell alignment on
+           the page box itself, so center INSIDE it: the slide is a plain
+           block and .inner is a full-height flex column that centers */
+        display: block;
+        background:
+          radial-gradient(ellipse 60% 45% at 75% -5%, rgba(255,80,20,0.26), transparent 65%),
+          radial-gradient(ellipse 45% 35% at 8% 45%, rgba(255,120,60,0.12), transparent 70%),
+          radial-gradient(ellipse 55% 45% at 88% 95%, rgba(255,60,0,0.16), transparent 70%),
+          #060504 !important;
+      }
+      .slide:last-of-type { page-break-after: auto; }
+      .slide .inner {
+        height: 100%; max-width: none; margin: 0;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      .slide .inner > * { width: 100%; max-width: 1240px; margin-left: auto !important; margin-right: auto !important; }
+      /* narrow-content slides: center the block so kicker and content align */
+      .slide[data-label="Introduction"] .inner > *,
+      .slide[data-label="Live demos"] .inner > * { max-width: 920px; }
+      .slide .anim > * { animation: none !important; opacity: 1 !important; }
+      .slide .bar-fill { animation: none !important; }
+      .stat-num { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: #f5f2ef; color: #f5f2ef; }
+    }
+  </style>
+</head>
+<body class="rail-open">
+
+  <!-- ═══ Email gate ═══ -->
+  <div id="gate">
+    <form id="gate-form">
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <img src="bytes-wordmark.png" alt="Bytes" style="height:44px;width:auto;margin:0 auto;display:block">
+        <h1>Investor Deck</h1>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label for="gate-email">Email</label>
+        <input id="gate-email" type="email" required placeholder="name@email.com" autocomplete="email">
+      </div>
+      <button type="submit" class="btn-primary">View the Deck</button>
+      <p style="font-size:13px;color:#8a827b;text-align:center">Instant access. We only use your email to follow up on the round.</p>
+    </form>
+  </div>
+
+  <div id="progress"><i></i></div>
+
+  <!-- ═══ Top chrome ═══ -->
+  <header id="chrome">
+    <button class="cbtn" id="btn-rail" title="Toggle slide panel (T)" aria-label="Toggle slide panel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+    </button>
+    <img class="logo" src="bytes-wordmark.png" alt="Bytes">
+    <span class="conf">Confidential · Seed 2026</span>
+    <span class="spacer"></span>
+    <button class="cbtn" id="btn-overview" title="Overview (G)" aria-label="Overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    </button>
+    <button class="cbtn" id="btn-print" title="Download PDF (P)" aria-label="Download PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+    </button>
+    <button class="cbtn" id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen or switch view">
+      <svg class="ic-fs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      <svg class="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2.5"/><line x1="11" y1="18.5" x2="13" y2="18.5"/></svg>
+      <svg class="ic-desktop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    </button>
+  </header>
+
+  <aside id="rail" aria-label="Slides"></aside>
+
+  <!-- ═══ Deck ═══ -->
+  <main id="deck">
+
+    <!-- 1 · Title -->
+    <section class="slide" data-label="Introduction">
+      <div class="inner">
+        <div class="anim">
+          <img src="bytes-wordmark.png" alt="Bytes" style="height:56px;width:auto;display:block">
+          <h1 style="font-size:clamp(38px,4.8vw,68px);line-height:1.08;font-weight:700;letter-spacing:-0.015em;margin:48px 0 0;max-width:16ch">AI ordering agents for restaurants.</h1>
+          <p class="muted" style="font-size:18px;line-height:30px;max-width:52ch;margin:24px 0 0">Bytes is the AI ordering and guest platform for restaurants — agents that capture every order, remember every guest, and bring every one back.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · Problem -->
+    <section class="slide" data-label="Problem">
+      <div class="inner">
+        <p class="kicker">The problem</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <div class="card" style="display:flex;flex-direction:column;gap:14px">
+            <p class="cardkick">Calls go unanswered</p>
+            <p style="font-size:17px;font-weight:700;line-height:27px">33% of calls go unanswered, and 85% of those guests never call back.</p>
+            <p class="muted" style="font-size:13px;line-height:21px;margin-top:auto">Each one is a $30–50 order lost.</p>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;gap:14px">
+            <p class="cardkick">Marketplaces own the guest</p>
+            <p style="font-size:17px;font-weight:700;line-height:27px">Marketplaces take up to 30% per order.</p>
+            <p class="muted" style="font-size:13px;line-height:21px;margin-top:auto">And the customer data stays with them, not the restaurant.</p>
+          </div>
+          <div class="card" style="display:flex;flex-direction:column;gap:14px">
+            <p class="cardkick">Everything is disconnected</p>
+            <p style="font-size:17px;font-weight:700;line-height:27px">Phone, web, app, and loyalty run on separate systems.</p>
+            <p class="muted" style="font-size:13px;line-height:21px;margin-top:auto">No single guest profile, no way to win anyone back, and no technical staff to manage it all.</p>
+          </div>
+        </div>
+        <p style="font-size:17px;font-weight:500;color:#c9beb6;text-align:center;margin:32px 0 0">Restaurants are renting their own customers.</p>
+      </div>
+    </section>
+
+    <!-- 3 · Product -->
+    <section class="slide" data-label="Product">
+      <div class="inner">
+        <p class="kicker">Product &amp; revenue model</p>
+        <div class="card stack-table anim" style="padding:8px 26px;overflow-x:auto">
+          <table>
+            <thead><tr><th>Product</th><th>Description</th><th style="white-space:nowrap">Price / mo</th><th style="text-align:right">Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="min-width:180px"><p class="tname">AI Hostess</p><p class="tsub">Voice &amp; Text Ordering</p></td>
+                <td>Takes complete orders by voice and text: modifiers, allergies, upsells, reservations. Recognizes returning guests and their usual order. Fluent in 65+ languages, handles 100,000 concurrent calls.</td>
+                <td data-col="Price / mo"><p class="tprice">$100–$250</p><p class="tpnote">+ 3% of sales</p></td>
+                <td style="text-align:right"><span class="badge live">Live</span></td>
+              </tr>
+              <tr>
+                <td style="min-width:180px"><p class="tname">AI Website Builder</p><p class="tsub">Direct Ordering Websites</p></td>
+                <td>Bytes builds each location’s ordering website: conversion-optimized, on-brand, pickup and delivery, one-tap reorder, food video menus. Direct orders, no middleman.</td>
+                <td data-col="Price / mo"><p class="tprice">$250</p><p class="tpnote">+ 3% of sales</p></td>
+                <td style="text-align:right"><span class="badge live">Live</span></td>
+              </tr>
+              <tr>
+                <td style="min-width:180px"><p class="tname">AI App Builder</p><p class="tsub">Branded Mobile Ordering</p></td>
+                <td>The same direct ordering experience as a native app on the guest’s phone — push notifications, one-tap reorder, no marketplace between you and the guest.</td>
+                <td data-col="Price / mo"><p class="tprice">$100</p><p class="tpnote">+ 3% of sales</p></td>
+                <td style="text-align:right"><span class="badge dev">In dev</span></td>
+              </tr>
+              <tr>
+                <td style="min-width:180px"><p class="tname">Loyalty</p><p class="tsub">Wallet Passes</p></td>
+                <td>Points, rewards, and Apple/Google wallet passes with geofencing. Text campaigns and automated win-backs that fire on guest behavior.</td>
+                <td data-col="Price / mo"><p class="tprice">$50</p></td>
+                <td style="text-align:right"><span class="badge live">Live</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px">
+          <p style="font-size:14px;line-height:23px;font-weight:500;color:#c9beb6;text-align:center;max-width:88ch;margin-inline:auto">Powered by AI Guest Intelligence: every order from any channel resolves to one guest profile, with one dashboard across all locations.</p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;margin-top:4px">
+            <div style="text-align:center"><p style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#78716c">Avg MRR</p><p style="font-size:20px;font-weight:700;font-feature-settings:'tnum' 1;margin-top:4px">$350<span style="font-size:13px;font-weight:500;color:#a39c96">/mo</span></p></div>
+            <p style="font-size:16px;color:#57504b">+</p>
+            <div style="text-align:center"><p style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#78716c">Platform fees</p><p style="font-size:20px;font-weight:700;font-feature-settings:'tnum' 1;margin-top:4px">~$175<span style="font-size:13px;font-weight:500;color:#a39c96">/mo</span></p></div>
+            <p style="font-size:16px;color:#57504b">=</p>
+            <div style="text-align:center"><p style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#ff8a50">ACV per location</p><p style="font-size:20px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1;margin-top:4px">~$6,300</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Live demos -->
+    <section class="slide" data-label="Live demos">
+      <div class="inner">
+        <p class="kicker">Try it right now</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:900px">
+          <div class="card" style="display:flex;flex-direction:column;gap:16px">
+            <p class="cardkick">AI Hostess · Call the live demo</p>
+            <a href="tel:+19295423372" style="background:linear-gradient(170deg, rgba(255,140,80,0.14), rgba(255,140,80,0.05));border:1px solid rgba(255,140,80,0.18);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;color:inherit">
+              <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">Talkin’ Tacos</p>
+              <p style="font-size:22px;font-weight:700;letter-spacing:0.01em;font-feature-settings:'tnum' 1">(929) 542-3372</p>
+              <p class="muted" style="font-size:12px;line-height:18px">Call and place an order — the AI answers.</p>
+            </a>
+            <div>
+              <p style="font-size:19px;font-weight:700">Multilingual</p>
+              <p class="muted" style="font-size:13px;line-height:20px;margin-top:6px">Pickup &amp; delivery · reservations · upsells</p>
+            </div>
+          </div>
+          <a href="https://caravan-kitchen.web.byteseats.com/" target="_blank" rel="noopener" class="card" style="display:flex;flex-direction:column;gap:16px;color:inherit">
+            <p class="cardkick">AI Website Builder · Open live example</p>
+            <div style="background:linear-gradient(150deg,#ffe7d6,#ffb384);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+                <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#3a1d0d">Caravan Kitchen</p>
+                <span style="font-size:10px;font-weight:600;color:#7c3a12">Dearborn Heights, MI</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.75);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+                <span style="font-size:13px;font-weight:500;color:#2a180c">Original SmashBurger</span>
+                <span style="font-size:12px;font-weight:700;color:#c2410c;background:rgba(194,65,12,0.12);border-radius:999px;padding:4px 10px;white-space:nowrap">Order online</span>
+              </div>
+            </div>
+            <div>
+              <p style="font-size:19px;font-weight:700;color:#f5f2ef">See a live ordering site</p>
+              <p class="muted" style="font-size:13px;line-height:20px;margin-top:6px">Built by Bytes · direct pickup ordering, no marketplace fees</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Traction -->
+    <section class="slide" data-label="Traction">
+      <div class="inner">
+        <p class="kicker">Traction</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+          <div class="card"><p class="cardkick">Revenue</p><p class="stat-num">$50K</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">MRR plus $15K platform fees, on $500K monthly GMV</p></div>
+          <div class="card"><p class="cardkick">Locations</p><p class="stat-num">460</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">130 live today; the rest signed across 45+ multi-location brands, rolling out on each brand’s schedule</p></div>
+          <div class="card"><p class="cardkick">Calls</p><p class="stat-num">70,000+</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Handled per month</p></div>
+          <div class="card"><p class="cardkick">Growth</p><p class="stat-num">38%</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Monthly revenue growth</p></div>
+          <div class="card"><p class="cardkick">Churn</p><p class="stat-num">5%</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Location churn across live accounts</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Why now -->
+    <section class="slide" data-label="Why now">
+      <div class="inner">
+        <p class="kicker">Why now</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">01</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Voice AI is finally good enough</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Natural conversation, instant answers, real orders handled end to end. Costs have fallen enough that it pays for itself at a single location.</p>
+          </div>
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">02</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Operators are adopting technology</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Marketplace fees pushed restaurants toward direct ordering, and owners now actively buy software that keeps the order, the guest, and the data.</p>
+          </div>
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">03</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Labor costs made automation urgent</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Wages are up and front-of-house roles are hard to fill. Capturing every order without adding staff is now a cost decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · Market -->
+    <section class="slide" data-label="Market">
+      <div class="inner">
+        <p class="kicker">Market</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+          <div class="card" style="padding:28px;display:flex;flex-direction:column"><p class="cardkick">Market size</p><p style="font-size:32px;font-weight:700;letter-spacing:-0.01em;white-space:nowrap;margin-top:12px">$49B</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:auto;padding-top:10px">AI in foodservice by 2029</p></div>
+          <div class="card" style="padding:28px;display:flex;flex-direction:column"><p class="cardkick">Restaurants</p><p style="font-size:32px;font-weight:700;letter-spacing:-0.01em;white-space:nowrap;margin-top:12px">800K</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:auto;padding-top:10px">In the US &amp; Canada</p></div>
+          <div class="card" style="padding:28px;display:flex;flex-direction:column"><p class="cardkick">Adoption</p><p style="font-size:32px;font-weight:700;letter-spacing:-0.01em;white-space:nowrap;margin-top:12px">83%</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:auto;padding-top:10px">Of operators say tech is a competitive edge — 25%+ already use AI (NRA, 2025)</p></div>
+        </div>
+        <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,140,80,0.16);border:1px solid rgba(255,140,80,0.16);border-radius:18px;overflow:hidden;margin-top:24px">
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:26px"><p class="cardkick">5-year target</p><p style="font-size:34px;font-weight:700;letter-spacing:-0.01em;margin-top:10px">15K locations</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">Under 2% of US &amp; Canada restaurants</p></div>
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:26px"><p class="cardkick">Full-attach ACV</p><p style="font-size:34px;font-weight:700;letter-spacing:-0.01em;margin-top:10px">$13,200</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">$650/mo software, all four products, + 3% of sales</p></div>
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:26px"><p class="cardkick">The math</p><p style="font-size:34px;font-weight:700;letter-spacing:-0.01em;margin-top:10px">$198M ARR</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">15K locations × $13,200 full-attach ACV</p></div>
+        </div>
+        <p style="font-size:12px;line-height:19px;color:#78716c;text-align:center;margin-top:14px">Full attach = AI Hostess $250 + Website $250 + App $100 + Loyalty $50 = $650/mo software, plus 3% of sales — $1,100/mo, or $13,200 a year, at ~$15K of monthly Bytes-processed sales per location at maturity.</p>
+      </div>
+    </section>
+
+    <!-- 8 · Competition -->
+    <section class="slide" data-label="Competition">
+      <div class="inner">
+        <p class="kicker">Competitive landscape</p>
+        <div class="card stack-table anim" style="padding:8px 26px;overflow-x:auto">
+          <table>
+            <thead><tr><th>Company</th><th>What they sell</th><th style="white-space:nowrap">Pricing</th><th>The gap</th></tr></thead>
+            <tbody>
+              <tr style="background:linear-gradient(90deg, rgba(255,90,30,0.07), transparent 80%)">
+                <td style="min-width:140px;border-bottom-color:rgba(255,140,80,0.25)"><p class="tname" style="color:#ffb07a">Bytes AI</p><p class="tsub">This deck</p></td>
+                <td style="color:#c9beb6;min-width:220px;border-bottom-color:rgba(255,140,80,0.25)">Voice + text ordering, direct ordering websites, branded apps, and loyalty — on one guest identity layer.</td>
+                <td data-col="Pricing" style="min-width:160px;border-bottom-color:rgba(255,140,80,0.25)"><p class="tprice" style="color:#ffb07a">From $100/mo</p><p class="tpnote">+ 3% of direct sales</p></td>
+                <td style="color:#c9beb6;min-width:220px;border-bottom-color:rgba(255,140,80,0.25)">Priced to land under every point solution, and paid on the revenue it creates.</td>
+              </tr>
+              <tr>
+                <td style="min-width:140px"><p class="tname">Loman AI</p><p class="tsub">AI phone answering</p></td>
+                <td style="min-width:220px">Flat-fee AI receptionist for restaurants: answers calls, FAQs, and phone orders; POS injection on the premium tier.</td>
+                <td data-col="Pricing" style="min-width:160px"><p class="tprice">$199–$299/mo</p><p class="tpnote" style="color:#a39c96">+ $149 setup</p></td>
+                <td style="min-width:220px">Phone only — no ordering website, app, loyalty, or cross-channel guest profile.</td>
+              </tr>
+              <tr>
+                <td style="min-width:140px"><p class="tname">Kea AI</p><p class="tsub">Voice ordering for chains</p></td>
+                <td style="min-width:220px">Voice AI that answers calls and pushes orders into the POS; skews toward larger multi-location operators.</td>
+                <td data-col="Pricing" style="min-width:160px"><p class="tprice">$450/mo</p><p class="tpnote" style="color:#a39c96">Custom for 20+ locations</p></td>
+                <td style="min-width:220px">One channel at 3–4× Bytes’ entry price — no direct-ordering web or guest layer.</td>
+              </tr>
+              <tr>
+                <td style="min-width:140px"><p class="tname">Maple AI</p><p class="tsub">AI phone assistant</p></td>
+                <td style="min-width:220px">Call answering and bookings; order-taking reserved for higher tiers. Distributes through POS partnerships.</td>
+                <td data-col="Pricing" style="min-width:160px"><p class="tprice">From ~$150/mo</p><p class="tpnote" style="color:#a39c96">Entry tier capped at 100 calls</p></td>
+                <td style="min-width:220px">Caps calls at entry, gates ordering — and owns no direct channel for the restaurant.</td>
+              </tr>
+              <tr>
+                <td style="min-width:140px"><p class="tname">Hostie AI</p><p class="tsub">AI host · calls, texts, emails</p></td>
+                <td style="min-width:220px">Guest-communication automation: reservations, questions, and messages across channels.</td>
+                <td data-col="Pricing" style="min-width:160px"><p class="tprice">From $199/mo</p><p class="tpnote" style="color:#a39c96">+ $0.05/min overages</p></td>
+                <td style="min-width:220px">Guest comms, not commerce — no ordering rails, so it answers guests but doesn’t capture revenue.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:#78716c;text-align:center;margin:14px 0 0">Competitor pricing is public or reported pricing as of August 2026.</p>
+      </div>
+    </section>
+
+    <!-- 9 · Moat -->
+    <section class="slide" data-label="Moat">
+      <div class="inner">
+        <p class="kicker">The moat</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">01</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Data that compounds</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Every order deepens the guest graph — preferences, usuals, win-back triggers. A competitor lands on day one with an empty database; the AI that already knows the guest sells more from the first ring.</p>
+          </div>
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">02</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">Switching costs, multiplied</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Phone, website, app, and loyalty run on one contract and one guest layer. Leaving Bytes means ripping out four systems at once — and abandoning the guest history that powers all of them.</p>
+          </div>
+          <div class="card">
+            <p style="font-size:12px;font-weight:600;color:#ff8a50;font-feature-settings:'tnum' 1">03</p>
+            <p style="font-size:19px;font-weight:700;margin-top:12px">A channel money can’t buy</p>
+            <p class="muted" style="font-size:14px;line-height:22px;margin-top:10px">Bytes’ wholesale distribution partner is an investor, and Bytes runs the only booth inside its four locations — equity-aligned and exclusive, not a paid listing a competitor can outbid next quarter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · Distribution -->
+    <section class="slide" data-label="Distribution">
+      <div class="inner">
+        <p class="kicker">Distribution advantage</p>
+        <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,140,80,0.16);border:1px solid rgba(255,140,80,0.16);border-radius:18px;overflow:hidden">
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:28px"><p class="cardkick">Wholesaler’s active customers</p><p style="font-size:38px;font-weight:700;letter-spacing:-0.01em;margin-top:12px">8,000+</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">Restaurant owners already buying from the partner every week.</p></div>
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:28px"><p class="cardkick">Wholesale locations</p><p style="font-size:38px;font-weight:700;letter-spacing:-0.01em;margin-top:12px">4 booths</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">On-site Bytes sales presence at every location.</p></div>
+          <div style="background:linear-gradient(160deg, rgba(20,14,10,0.92), rgba(13,10,8,0.96));padding:28px"><p class="cardkick">Exclusivity</p><p style="font-size:38px;font-weight:700;letter-spacing:-0.01em;margin-top:12px">Only booth</p><p class="muted" style="font-size:13px;line-height:20px;margin-top:8px">The wholesaler is an investor — no competitor can buy a presence inside.</p></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 11 · Go-to-market -->
+    <section class="slide" data-label="Go-to-market">
+      <div class="inner">
+        <p class="kicker" style="margin-bottom:18px">Go-to-market · 460 → 1,500 locations: scale what’s already working</p>
+
+        <div style="margin-bottom:30px">
+          <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;box-shadow:0 0 24px rgba(255,80,20,0.25)">
+            <div style="width:13%;background:linear-gradient(90deg,#ff3d00,#ff5a1e)"></div>
+            <div style="width:30%;background:linear-gradient(90deg,#ff8a50,#ffa06b);border-left:1px solid rgba(6,5,4,0.5)"></div>
+            <div style="width:57%;background:linear-gradient(90deg,#ffd0b0,#ffe4d2);border-left:1px solid rgba(6,5,4,0.5)"></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:13px">
+            <span class="lg"><i style="background:#ff4a12"></i>13% ISO processors</span>
+            <span class="lg"><i style="background:#ff9560"></i>30% Trade show booths</span>
+            <span class="lg"><i style="background:#ffdac2"></i>57% Direct sales &amp; referrals</span>
+            <span class="lg" style="color:#78716c">Where the 460 signed locations came from — every channel already producing</span>
+          </div>
+        </div>
+
+        <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:30px 40px">
+          <div class="ch">
+            <p class="rt"><span class="rn">01</span>ISO reseller program</p>
+            <span class="proof">13% today · 16+ ISOs in pipeline</span>
+            <p class="muted rc">Formalize what ISOs already send us: payment-agnostic bundling, 120 accounts a year per reseller. Eight at quota ≈ 1,000 accounts a year.</p>
+          </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">02</span>Trade show booths</p>
+            <span class="proof">30% · best-converting channel</span>
+            <p class="muted rc">Double down on our strongest source: more shows, more markets, a dedicated booth team.</p>
+          </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">03</span>Wholesale distribution</p>
+            <span class="proof">Strategic investor · 8,000 owners</span>
+            <p class="muted rc">Revenue share for the wholesaler; owners who adopt earn back three months of software in wholesale credits.</p>
+          </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">04</span>Direct sales &amp; referrals</p>
+            <span class="proof">57% · all founder-led</span>
+            <p class="muted rc">Codify the founder playbook: street reps in dense markets, paid acquisition in metros, referrals inside owner networks.</p>
+          </div>
+          <div class="ch">
+            <p class="rt"><span class="rn">05</span>Chef &amp; influencer partners</p>
+            <span class="proof">Top of funnel</span>
+            <p class="muted rc">Trusted operator voices generate low-cost demand that feeds every channel above.</p>
+          </div>
+        </div>
+
+        <p style="font-size:14px;line-height:22px;font-weight:500;color:#c9beb6;border-top:1px solid rgba(255,140,80,0.28);padding-top:18px;margin-top:30px"><b style="color:#ffb07a">Bottom line:</b> 460 locations with zero sales team and no formal channel programs. This raise systematizes what’s already converting.</p>
+      </div>
+    </section>
+
+    <!-- 12 · The raise -->
+    <section class="slide" data-label="The raise">
+      <div class="inner">
+        <p class="kicker">The raise</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div class="card" style="padding:28px"><p class="cardkick">Pre-seed SAFE · Deployed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$900K</p></div>
+          <div class="card" style="padding:28px"><p class="cardkick">Seed SAFE · Committed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$1.5M</p></div>
+          <div style="background:linear-gradient(120deg,#ff3d00,#ff7a3d 55%,#ffb07a);border-radius:20px;padding:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 12px 50px rgba(255,80,20,0.45)">
+            <p class="cardkick" style="color:#fff">Seed SAFE · Open</p><p style="font-size:34px;font-weight:700;color:#fff;margin-top:12px">$2.5M</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · Use of funds -->
+    <section class="slide" data-label="Use of funds">
+      <div class="inner">
+        <p class="kicker">Use of funds</p>
+        <div class="card anim" style="padding:32px 28px;display:flex;flex-direction:column;gap:26px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <p style="font-size:17px;font-weight:700">Marketing &amp; GTM</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">45%</p>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:45%"></div></div>
+            <p class="muted" style="font-size:13px;line-height:21px">Demand generation and brand, case studies from live locations, trade-show programs, and co-marketing with POS and wholesale partners to lower CAC as the funnel scales.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <p style="font-size:17px;font-weight:700">Product &amp; engineering</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">25%</p>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+            <p class="muted" style="font-size:13px;line-height:21px">AI Hostess and AI Website Builder depth, shipping the AI App Builder and AI Guest Intelligence, reliability at scale, and onboarding automation so a location goes live in days, not weeks.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <p style="font-size:17px;font-weight:700">Sales</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">20%</p>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+            <p class="muted" style="font-size:13px;line-height:21px">First dedicated sales hires converting the 900+ trade-show leads and marketing-generated pipeline into contracted brands.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <p style="font-size:17px;font-weight:700">Wholesale booths</p>
+              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">10%</p>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
+            <p class="muted" style="font-size:13px;line-height:21px">On-site sales presence across all four wholesale locations — the exclusive, equity-aligned channel reaching 8,000+ restaurant owners.</p>
+          </div>
+        </div>
+        <p class="muted" style="font-size:15px;line-height:26px;margin-top:22px;max-width:72ch">Targets 18–24 months of runway: convert the contracted 460-location pipeline, ship the AI App Builder, and reach the next raise on revenue milestones rather than promises.</p>
+      </div>
+    </section>
+
+    <!-- 14 · Team -->
+    <section class="slide" data-label="Team">
+      <div class="inner">
+        <p class="kicker">Founding team</p>
+        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div class="card" style="padding:24px">
+            <p style="font-size:17px;font-weight:700">Moe M.</p>
+            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CEO</p>
+            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Scaled a restaurant-tech SaaS to $10M GMV in 18 months. Owner of two food brands.</p>
+          </div>
+          <div class="card" style="padding:24px">
+            <p style="font-size:17px;font-weight:700">Mustafa R.</p>
+            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; COO</p>
+            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Payments veteran; scaled a processor to 1,800+ merchants nationwide.</p>
+          </div>
+          <div class="card" style="padding:24px">
+            <p style="font-size:17px;font-weight:700">Nader A.</p>
+            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CPO</p>
+            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Built four SaaS products serving 400,000+ users.</p>
+          </div>
+          <div class="card" style="padding:24px">
+            <p style="font-size:17px;font-weight:700">Muthana A.</p>
+            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CTO</p>
+            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Ex-onsemi AI vision engineer; architected the voice-AI infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · Close -->
+    <section class="slide" data-label="Close">
+      <div class="inner">
+        <div style="background:radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255,90,30,0.22), transparent 70%), linear-gradient(170deg, rgba(255,255,255,0.03), rgba(255,120,60,0.04));border:1px solid rgba(255,140,80,0.2);border-radius:24px;padding:clamp(48px,6vw,88px) 32px;text-align:center">
+          <p class="kicker" style="margin-bottom:28px">Seed round · SAFE note</p>
+          <span class="chip">$1.5M committed · $2.5M SAFE allocation open</span>
+          <p class="muted" style="font-size:16px;line-height:27px;max-width:56ch;margin:24px auto 0">Bytes AI is raising the remaining allocation to scale its marketing and sales engine, convert the signed rollout pipeline, and complete the four-product platform.</p>
+          <p style="font-size:15px;font-weight:700;margin-top:28px"><a href="mailto:Moe@trybytes.ai?subject=Bytes%20AI%20Seed%20Round">Investor contact · Moe@trybytes.ai</a></p>
+        </div>
+        <p id="viewer-line" style="padding-top:28px;font-size:13px;color:#78716c;text-align:center">Bytes AI · Confidential · Seed 2026</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ Bottom HUD ═══ -->
+  <div id="hud">
+    <button class="cbtn" id="btn-prev" title="Previous (←)" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 5-7 7 7 7"/></svg>
+    </button>
+    <span class="count"><b id="hud-cur">1</b>&nbsp;/&nbsp;<span id="hud-total">15</span></span>
+    <button class="cbtn" id="btn-next" title="Next (→)" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <button id="hint" type="button">Desktop layout · tap here for mobile view</button>
+
+  <!-- ═══ Overview grid ═══ -->
+  <div id="overview">
+    <button class="cbtn" id="ov-close" title="Close (Esc)" aria-label="Close overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="ogrid"></div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    var CAPTURE_ENDPOINT = ''; // optional: POST { email, source } here on unlock
+
+    /* ── Email gate ── */
+    var gateForm = document.getElementById('gate-form');
+    var gateEmail = document.getElementById('gate-email');
+    function unlock(email) {
+      document.body.classList.add('unlocked');
+      if (email) {
+        var v = document.getElementById('viewer-line');
+        if (v) v.textContent = 'Bytes AI · Confidential · Seed 2026 · Shared with ' + email;
+      }
+    }
+    try {
+      var saved = localStorage.getItem('bytes_investor_email');
+      if (saved) unlock(saved);
+    } catch (e) {}
+    gateForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = gateEmail.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+      try {
+        localStorage.setItem('bytes_investor_email', email);
+        var log = JSON.parse(localStorage.getItem('bytes_captured_emails') || '[]');
+        log.push({ email: email, at: new Date().toISOString() });
+        localStorage.setItem('bytes_captured_emails', JSON.stringify(log));
+      } catch (err) {}
+      if (CAPTURE_ENDPOINT) {
+        fetch(CAPTURE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ email: email, source: 'Bytes AI investor deck' })
+        }).catch(function () {});
+      }
+      unlock(email);
+      initView();
+    });
+
+    /* ── Deck engine ── */
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total = slides.length;
+    var cur = -1;
+    var rail = document.getElementById('rail');
+    var ogrid = document.querySelector('#overview .ogrid');
+    var hudCur = document.getElementById('hud-cur');
+    var progress = document.querySelector('#progress i');
+    document.getElementById('hud-total').textContent = total;
+
+    function makeThumb(slide, i) {
+      var b = document.createElement('button');
+      b.className = 'thumb';
+      b.setAttribute('aria-label', 'Slide ' + (i + 1) + ': ' + slide.dataset.label);
+      var vp = document.createElement('div');
+      vp.className = 'thumb-viewport';
+      var canvas = document.createElement('div');
+      canvas.className = 'thumb-canvas';
+      canvas.appendChild(slide.querySelector('.inner').cloneNode(true));
+      vp.appendChild(canvas);
+      var meta = document.createElement('div');
+      meta.className = 'tmeta';
+      meta.innerHTML = '<span class="tn">' + (i + 1) + '</span><span class="tl"></span>';
+      meta.querySelector('.tl').textContent = slide.dataset.label;
+      b.appendChild(vp);
+      b.appendChild(meta);
+      b.addEventListener('click', function () {
+        go(i);
+        document.body.classList.remove('overview-open');
+        if (window.innerWidth < 900) document.body.classList.remove('rail-open');
+      });
+      new ResizeObserver(function () {
+        canvas.style.transform = 'scale(' + vp.clientWidth / 1280 + ')';
+      }).observe(vp);
+      return b;
+    }
+    slides.forEach(function (s, i) {
+      rail.appendChild(makeThumb(s, i));
+      ogrid.appendChild(makeThumb(s, i));
+    });
+    var railThumbs = rail.querySelectorAll('.thumb');
+    var gridThumbs = ogrid.querySelectorAll('.thumb');
+
+    function go(n) {
+      n = Math.max(0, Math.min(total - 1, n));
+      if (n === cur) return;
+      slides[n].classList.toggle('back', n < cur);
+      if (cur >= 0) slides[cur].classList.remove('active');
+      slides[n].classList.add('active');
+      slides[n].scrollTop = 0;
+      railThumbs.forEach(function (t, i) { t.classList.toggle('active', i === n); });
+      gridThumbs.forEach(function (t, i) { t.classList.toggle('active', i === n); });
+      if (railThumbs[n]) railThumbs[n].scrollIntoView({ block: 'nearest' });
+      hudCur.textContent = n + 1;
+      progress.style.width = ((n + 1) / total * 100) + '%';
+      cur = n;
+      if (('#' + (n + 1)) !== location.hash) history.replaceState(null, '', '#' + (n + 1));
+    }
+    function next() { go(cur + 1); }
+    function prev() { go(cur - 1); }
+
+    document.getElementById('btn-next').addEventListener('click', next);
+    document.getElementById('btn-prev').addEventListener('click', prev);
+    document.getElementById('btn-rail').addEventListener('click', function () {
+      document.body.classList.toggle('rail-open');
+    });
+    document.getElementById('btn-overview').addEventListener('click', function () {
+      document.body.classList.toggle('overview-open');
+    });
+    /* Download the pre-rendered desktop PDF (same 16:10 deck on every device).
+       Regenerate bytes-ai-investor-deck.pdf whenever slide content changes. */
+    function downloadPdf() {
+      var a = document.createElement('a');
+      a.href = 'bytes-ai-investor-deck.pdf';
+      a.download = 'Bytes AI — Investor Deck.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    document.getElementById('btn-print').addEventListener('click', downloadPdf);
+    document.getElementById('ov-close').addEventListener('click', function () {
+      document.body.classList.remove('overview-open');
+    });
+    /* ── View management ──
+       Phones default to the full desktop layout (pinch-zoomable); the toggle
+       button and the one-time hint pill opt into the mobile-optimized view.
+       Desktop machines keep a normal fullscreen button. */
+    var vpMeta = document.querySelector('meta[name="viewport"]');
+    var isPhone = Math.min(screen.width, screen.height) < 700;
+    var hintEl = document.getElementById('hint');
+    var fsBtn = document.getElementById('btn-fs');
+    function setView(desktop, remember) {
+      document.body.classList.toggle('forced-desktop', desktop);
+      document.body.classList.toggle('rail-open', desktop);
+      vpMeta.setAttribute('content', desktop ? 'width=1280' : 'width=device-width, initial-scale=1, viewport-fit=cover');
+      fsBtn.title = desktop ? 'Switch to mobile view' : 'Switch to desktop view';
+      if (remember) try { localStorage.setItem('bytes_view', desktop ? 'desktop' : 'mobile'); } catch (e) {}
+      document.body.classList.remove('hint-show');
+    }
+    function showHint() {
+      try {
+        if (localStorage.getItem('bytes_view_hint')) return;
+        localStorage.setItem('bytes_view_hint', '1');
+      } catch (e) {}
+      document.body.classList.add('hint-show');
+      setTimeout(function () { document.body.classList.remove('hint-show'); }, 6000);
+    }
+    hintEl.addEventListener('click', function () { setView(false, true); });
+    var viewReady = false;
+    function initView() {
+      if (viewReady) return;
+      viewReady = true;
+      if (isPhone) {
+        document.body.classList.add('is-phone');
+        var pref = null;
+        try { pref = localStorage.getItem('bytes_view'); } catch (e) {}
+        if (pref === 'mobile') { setView(false, false); }
+        else { setView(true, false); showHint(); }
+      } else if (window.innerWidth < 900) {
+        document.body.classList.remove('rail-open');
+      }
+    }
+    fsBtn.addEventListener('click', function () {
+      if (isPhone) {
+        setView(!document.body.classList.contains('forced-desktop'), true);
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen().catch(function () {});
+      }
+    });
+
+    /* keyboard */
+    document.addEventListener('keydown', function (e) {
+      if (!document.body.classList.contains('unlocked')) return;
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        downloadPdf();
+        return;
+      }
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+      switch (e.key) {
+        case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': e.preventDefault(); next(); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp': e.preventDefault(); prev(); break;
+        case 'Home': e.preventDefault(); go(0); break;
+        case 'End': e.preventDefault(); go(total - 1); break;
+        case 'f': case 'F': document.getElementById('btn-fs').click(); break;
+        case 'g': case 'G': document.getElementById('btn-overview').click(); break;
+        case 't': case 'T': document.getElementById('btn-rail').click(); break;
+        case 'p': case 'P': e.preventDefault(); downloadPdf(); break;
+        case 'Escape': document.body.classList.remove('overview-open'); break;
+      }
+    });
+
+    /* touch swipe */
+    var tx = null, ty = null;
+    document.getElementById('deck').addEventListener('touchstart', function (e) {
+      tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+    }, { passive: true });
+    document.getElementById('deck').addEventListener('touchend', function (e) {
+      if (tx === null) return;
+      var dx = e.changedTouches[0].clientX - tx;
+      var dy = e.changedTouches[0].clientY - ty;
+      if (Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.5) (dx < 0 ? next : prev)();
+      tx = ty = null;
+    }, { passive: true });
+
+    /* deep links */
+    window.addEventListener('hashchange', function () {
+      var n = parseInt(location.hash.slice(1), 10);
+      if (!isNaN(n)) go(n - 1);
+    });
+
+    /* pick the right view once the deck is visible (the email gate always
+       renders at device width so typing stays comfortable) */
+    if (document.body.classList.contains('unlocked')) initView();
+
+    /* always open on the first slide; a stale #n in the URL from a previous
+       visit shouldn't decide where the deck starts */
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    go(0);
+  })();
+  </script>
+</body>
+</html>
