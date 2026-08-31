@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bytes AI — Investor Deck</title>
+  <title>Bytes AI — Teaser Deck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Bytes AI is the AI ordering and guest platform for restaurants — agents that capture every order, remember every guest, and bring every one back.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="bytes-logo.png">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://deck.trybytes.ai/">
-  <meta property="og:title" content="Bytes AI — Investor Deck">
+  <meta property="og:url" content="https://one-pager.trybytes.ai/">
+  <meta property="og:title" content="Bytes AI — Teaser Deck">
   <meta property="og:description" content="AI ordering agents for restaurants.">
-  <meta property="og:image" content="https://deck.trybytes.ai/bytes-og.png">
+  <meta property="og:image" content="https://one-pager.trybytes.ai/bytes-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bytes AI — Investor Deck">
+  <meta name="twitter:title" content="Bytes AI — Teaser Deck">
   <meta name="twitter:description" content="AI ordering agents for restaurants.">
-  <meta name="twitter:image" content="https://deck.trybytes.ai/bytes-og.png">
+  <meta name="twitter:image" content="https://one-pager.trybytes.ai/bytes-og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -84,11 +84,15 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 0 100px rgba(255,90,30,0.18), 0 30px 70px rgba(0,0,0,0.5);
     }
     #gate h1 { font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; text-align: center; }
-    #gate label { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; }
-    #gate input {
+    #gate label, .field label { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a50; }
+    #gate input, .field input {
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 999px; padding: 16px 22px; font-size: 15px; font-family: inherit; color: #f5f2ef; outline: none;
     }
+    #gate input:focus, .field input:focus { border-color: rgba(255,140,80,0.55); background: rgba(255,255,255,0.07); }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field input { padding: 13px 20px; }
+    .btn-primary[disabled] { opacity: 0.6; cursor: default; }
     .btn-primary {
       width: 100%; border: 0; border-radius: 999px; padding: 16px 22px; font-size: 15px; font-weight: 700;
       color: #1a0c05; background: linear-gradient(100deg,#ff3d00 0%,#ff9a62 60%,#ffc09a 100%); cursor: pointer;
@@ -324,7 +328,7 @@
     <form id="gate-form">
       <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
         <img src="bytes-wordmark.png" alt="Bytes" style="height:44px;width:auto;margin:0 auto;display:block">
-        <h1>Investor Deck</h1>
+        <h1>Teaser Deck</h1>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <label for="gate-email">Email</label>
@@ -347,9 +351,6 @@
     <span class="spacer"></span>
     <button class="cbtn" id="btn-overview" title="Overview (G)" aria-label="Overview">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-    </button>
-    <button class="cbtn" id="btn-print" title="Download PDF (P)" aria-label="Download PDF">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
     </button>
     <button class="cbtn" id="btn-fs" title="Fullscreen (F)" aria-label="Fullscreen or switch view">
       <svg class="ic-fs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
@@ -541,52 +542,8 @@
       </div>
     </section>
 
-    <!-- 8 · Competition -->
-    <section class="slide" data-label="Competition">
-      <div class="inner">
-        <p class="kicker">Competitive landscape</p>
-        <div class="card stack-table anim" style="padding:8px 26px;overflow-x:auto">
-          <table>
-            <thead><tr><th>Company</th><th>What they sell</th><th style="white-space:nowrap">Pricing</th><th>The gap</th></tr></thead>
-            <tbody>
-              <tr style="background:linear-gradient(90deg, rgba(255,90,30,0.07), transparent 80%)">
-                <td style="min-width:140px;border-bottom-color:rgba(255,140,80,0.25)"><p class="tname" style="color:#ffb07a">Bytes AI</p><p class="tsub">This deck</p></td>
-                <td style="color:#c9beb6;min-width:220px;border-bottom-color:rgba(255,140,80,0.25)">Voice + text ordering, direct ordering websites, branded apps, and loyalty — on one guest identity layer.</td>
-                <td data-col="Pricing" style="min-width:160px;border-bottom-color:rgba(255,140,80,0.25)"><p class="tprice" style="color:#ffb07a">From $100/mo</p><p class="tpnote">+ 3% of direct sales</p></td>
-                <td style="color:#c9beb6;min-width:220px;border-bottom-color:rgba(255,140,80,0.25)">Priced to land under every point solution, and paid on the revenue it creates.</td>
-              </tr>
-              <tr>
-                <td style="min-width:140px"><p class="tname">Loman AI</p><p class="tsub">AI phone answering</p></td>
-                <td style="min-width:220px">Flat-fee AI receptionist for restaurants: answers calls, FAQs, and phone orders; POS injection on the premium tier.</td>
-                <td data-col="Pricing" style="min-width:160px"><p class="tprice">$199–$299/mo</p><p class="tpnote" style="color:#a39c96">+ $149 setup</p></td>
-                <td style="min-width:220px">Phone only — no ordering website, app, loyalty, or cross-channel guest profile.</td>
-              </tr>
-              <tr>
-                <td style="min-width:140px"><p class="tname">Kea AI</p><p class="tsub">Voice ordering for chains</p></td>
-                <td style="min-width:220px">Voice AI that answers calls and pushes orders into the POS; skews toward larger multi-location operators.</td>
-                <td data-col="Pricing" style="min-width:160px"><p class="tprice">$450/mo</p><p class="tpnote" style="color:#a39c96">Custom for 20+ locations</p></td>
-                <td style="min-width:220px">One channel at 3–4× Bytes’ entry price — no direct-ordering web or guest layer.</td>
-              </tr>
-              <tr>
-                <td style="min-width:140px"><p class="tname">Maple AI</p><p class="tsub">AI phone assistant</p></td>
-                <td style="min-width:220px">Call answering and bookings; order-taking reserved for higher tiers. Distributes through POS partnerships.</td>
-                <td data-col="Pricing" style="min-width:160px"><p class="tprice">From ~$150/mo</p><p class="tpnote" style="color:#a39c96">Entry tier capped at 100 calls</p></td>
-                <td style="min-width:220px">Caps calls at entry, gates ordering — and owns no direct channel for the restaurant.</td>
-              </tr>
-              <tr>
-                <td style="min-width:140px"><p class="tname">Hostie AI</p><p class="tsub">AI host · calls, texts, emails</p></td>
-                <td style="min-width:220px">Guest-communication automation: reservations, questions, and messages across channels.</td>
-                <td data-col="Pricing" style="min-width:160px"><p class="tprice">From $199/mo</p><p class="tpnote" style="color:#a39c96">+ $0.05/min overages</p></td>
-                <td style="min-width:220px">Guest comms, not commerce — no ordering rails, so it answers guests but doesn’t capture revenue.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size:12px;color:#78716c;text-align:center;margin:14px 0 0">Competitor pricing is public or reported pricing as of August 2026.</p>
-      </div>
-    </section>
 
-    <!-- 9 · Moat -->
+    <!-- 8 · Moat -->
     <section class="slide" data-label="Moat">
       <div class="inner">
         <p class="kicker">The moat</p>
@@ -610,7 +567,7 @@
       </div>
     </section>
 
-    <!-- 10 · Distribution -->
+    <!-- 9 · Distribution -->
     <section class="slide" data-label="Distribution">
       <div class="inner">
         <p class="kicker">Distribution advantage</p>
@@ -623,152 +580,45 @@
     </section>
 
 
-    <!-- 11 · Go-to-market -->
-    <section class="slide" data-label="Go-to-market">
+
+
+
+
+    <!-- 10 · Request the full deck -->
+    <section class="slide" data-label="Request the deck">
       <div class="inner">
-        <p class="kicker" style="margin-bottom:18px">Go-to-market · 460 → 1,500 locations: scale what’s already working</p>
+        <div style="background:radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255,90,30,0.22), transparent 70%), linear-gradient(170deg, rgba(255,255,255,0.03), rgba(255,120,60,0.04));border:1px solid rgba(255,140,80,0.2);border-radius:24px;padding:clamp(30px,3.2vw,46px) clamp(24px,4vw,56px);text-align:center">
+          <p class="kicker" style="margin-bottom:18px">Next step</p>
+          <p style="font-size:clamp(27px,2.9vw,39px);line-height:1.1;font-weight:700;letter-spacing:-0.015em;margin:0 auto;max-width:22ch">Request the full pitch deck.</p>
+          <p class="muted" style="font-size:15px;line-height:25px;max-width:60ch;margin:16px auto 0">This teaser covers the product, the traction and the market. The full deck adds the raise and use of funds, the go-to-market plan, the competitive landscape and the team.</p>
 
-        <div style="margin-bottom:30px">
-          <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;box-shadow:0 0 24px rgba(255,80,20,0.25)">
-            <div style="width:13%;background:linear-gradient(90deg,#ff3d00,#ff5a1e)"></div>
-            <div style="width:30%;background:linear-gradient(90deg,#ff8a50,#ffa06b);border-left:1px solid rgba(6,5,4,0.5)"></div>
-            <div style="width:57%;background:linear-gradient(90deg,#ffd0b0,#ffe4d2);border-left:1px solid rgba(6,5,4,0.5)"></div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:13px">
-            <span class="lg"><i style="background:#ff4a12"></i>13% ISO processors</span>
-            <span class="lg"><i style="background:#ff9560"></i>30% Trade show booths</span>
-            <span class="lg"><i style="background:#ffdac2"></i>57% Direct sales &amp; referrals</span>
-            <span class="lg" style="color:#78716c">Where the 460 signed locations came from — every channel already producing</span>
-          </div>
-        </div>
-
-        <div class="anim" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:30px 40px">
-          <div class="ch">
-            <p class="rt"><span class="rn">01</span>ISO reseller program</p>
-            <span class="proof">13% today · 16+ ISOs in pipeline</span>
-            <p class="muted rc">Formalize what ISOs already send us: payment-agnostic bundling, 120 accounts a year per reseller. Eight at quota ≈ 1,000 accounts a year.</p>
-          </div>
-          <div class="ch">
-            <p class="rt"><span class="rn">02</span>Trade show booths</p>
-            <span class="proof">30% · best-converting channel</span>
-            <p class="muted rc">Double down on our strongest source: more shows, more markets, a dedicated booth team.</p>
-          </div>
-          <div class="ch">
-            <p class="rt"><span class="rn">03</span>Wholesale distribution</p>
-            <span class="proof">Strategic investor · 8,000 owners</span>
-            <p class="muted rc">Revenue share for the wholesaler; owners who adopt earn back three months of software in wholesale credits.</p>
-          </div>
-          <div class="ch">
-            <p class="rt"><span class="rn">04</span>Direct sales &amp; referrals</p>
-            <span class="proof">57% · all founder-led</span>
-            <p class="muted rc">Codify the founder playbook: street reps in dense markets, paid acquisition in metros, referrals inside owner networks.</p>
-          </div>
-          <div class="ch">
-            <p class="rt"><span class="rn">05</span>Chef &amp; influencer partners</p>
-            <span class="proof">Top of funnel</span>
-            <p class="muted rc">Trusted operator voices generate low-cost demand that feeds every channel above.</p>
-          </div>
-        </div>
-
-        <p style="font-size:14px;line-height:22px;font-weight:500;color:#c9beb6;border-top:1px solid rgba(255,140,80,0.28);padding-top:18px;margin-top:30px"><b style="color:#ffb07a">Bottom line:</b> 460 locations with zero sales team and no formal channel programs. This raise systematizes what’s already converting.</p>
-      </div>
-    </section>
-
-    <!-- 12 · The raise -->
-    <section class="slide" data-label="The raise">
-      <div class="inner">
-        <p class="kicker">The raise</p>
-        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-          <div class="card" style="padding:28px"><p class="cardkick">Pre-seed SAFE · Deployed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$900K</p></div>
-          <div class="card" style="padding:28px"><p class="cardkick">Seed SAFE · Committed</p><p style="font-size:34px;font-weight:700;margin-top:12px">$1.5M</p></div>
-          <div style="background:linear-gradient(120deg,#ff3d00,#ff7a3d 55%,#ffb07a);border-radius:20px;padding:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 12px 50px rgba(255,80,20,0.45)">
-            <p class="cardkick" style="color:#fff">Seed SAFE · Open</p><p style="font-size:34px;font-weight:700;color:#fff;margin-top:12px">$2.5M</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 13 · Use of funds -->
-    <section class="slide" data-label="Use of funds">
-      <div class="inner">
-        <p class="kicker">Use of funds</p>
-        <div class="card anim" style="padding:32px 28px;display:flex;flex-direction:column;gap:26px">
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
-              <p style="font-size:17px;font-weight:700">Marketing &amp; GTM</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">45%</p>
+          <form id="req-form" style="display:flex;flex-direction:column;gap:10px;max-width:420px;margin:24px auto 0;text-align:left">
+            <div class="field">
+              <label for="req-name">Name</label>
+              <input id="req-name" name="name" type="text" required placeholder="Jane Investor" autocomplete="name">
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:45%"></div></div>
-            <p class="muted" style="font-size:13px;line-height:21px">Demand generation and brand, case studies from live locations, trade-show programs, and co-marketing with POS and wholesale partners to lower CAC as the funnel scales.</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
-              <p style="font-size:17px;font-weight:700">Product &amp; engineering</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">25%</p>
+            <div class="field">
+              <label for="req-email">Email</label>
+              <input id="req-email" name="email" type="email" required placeholder="name@email.com" autocomplete="email">
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
-            <p class="muted" style="font-size:13px;line-height:21px">AI Hostess and AI Website Builder depth, shipping the AI App Builder and AI Guest Intelligence, reliability at scale, and onboarding automation so a location goes live in days, not weeks.</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
-              <p style="font-size:17px;font-weight:700">Sales</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">20%</p>
+            <div class="field">
+              <label for="req-firm">Firm <span style="color:#78716c;font-weight:500;letter-spacing:0">optional</span></label>
+              <input id="req-firm" name="firm" type="text" placeholder="Fund or company" autocomplete="organization">
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
-            <p class="muted" style="font-size:13px;line-height:21px">First dedicated sales hires converting the 900+ trade-show leads and marketing-generated pipeline into contracted brands.</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
-              <p style="font-size:17px;font-weight:700">Wholesale booths</p>
-              <p style="font-size:16px;font-weight:700;color:#ffb07a;font-feature-settings:'tnum' 1">10%</p>
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
-            <p class="muted" style="font-size:13px;line-height:21px">On-site sales presence across all four wholesale locations — the exclusive, equity-aligned channel reaching 8,000+ restaurant owners.</p>
-          </div>
-        </div>
-        <p class="muted" style="font-size:15px;line-height:26px;margin-top:22px;max-width:72ch">Targets 18–24 months of runway: convert the contracted 460-location pipeline, ship the AI App Builder, and reach the next raise on revenue milestones rather than promises.</p>
-      </div>
-    </section>
+            <button type="submit" class="btn-primary" style="margin-top:6px">Request the full deck</button>
+            <p id="req-error" role="alert" style="display:none;font-size:13px;color:#ff8a50;text-align:center;margin:0"></p>
+          </form>
 
-    <!-- 14 · Team -->
-    <section class="slide" data-label="Team">
-      <div class="inner">
-        <p class="kicker">Founding team</p>
-        <div class="grid anim" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-          <div class="card" style="padding:24px">
-            <p style="font-size:17px;font-weight:700">Moe M.</p>
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CEO</p>
-            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Scaled a restaurant-tech SaaS to $10M GMV in 18 months. Owner of two food brands.</p>
+          <div id="req-done" style="display:none;max-width:420px;margin:24px auto 0">
+            <div style="border:1px solid rgba(255,140,80,0.3);border-radius:18px;padding:28px 24px;background:rgba(255,120,60,0.06)">
+              <p style="font-size:19px;font-weight:700;margin:0">Request received.</p>
+              <p class="muted" id="req-done-line" style="font-size:14px;line-height:23px;margin:10px 0 0">We&rsquo;ll send the full deck over shortly.</p>
+            </div>
           </div>
-          <div class="card" style="padding:24px">
-            <p style="font-size:17px;font-weight:700">Mustafa R.</p>
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; COO</p>
-            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Payments veteran; scaled a processor to 1,800+ merchants nationwide.</p>
-          </div>
-          <div class="card" style="padding:24px">
-            <p style="font-size:17px;font-weight:700">Nader A.</p>
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CPO</p>
-            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Built four SaaS products serving 400,000+ users.</p>
-          </div>
-          <div class="card" style="padding:24px">
-            <p style="font-size:17px;font-weight:700">Muthana A.</p>
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ff8a50;margin-top:6px">Co-Founder &amp; CTO</p>
-            <p class="muted" style="font-size:13px;line-height:20px;margin-top:10px">Ex-onsemi AI vision engineer; architected the voice-AI infrastructure.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 15 · Close -->
-    <section class="slide" data-label="Close">
-      <div class="inner">
-        <div style="background:radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255,90,30,0.22), transparent 70%), linear-gradient(170deg, rgba(255,255,255,0.03), rgba(255,120,60,0.04));border:1px solid rgba(255,140,80,0.2);border-radius:24px;padding:clamp(48px,6vw,88px) 32px;text-align:center">
-          <p class="kicker" style="margin-bottom:28px">Seed round · SAFE note</p>
-          <span class="chip">$1.5M committed · $2.5M SAFE allocation open</span>
-          <p class="muted" style="font-size:16px;line-height:27px;max-width:56ch;margin:24px auto 0">Bytes AI is raising the remaining allocation to scale its marketing and sales engine, convert the signed rollout pipeline, and complete the four-product platform.</p>
-          <p style="font-size:15px;font-weight:700;margin-top:28px"><a href="mailto:Moe@trybytes.ai?subject=Bytes%20AI%20Seed%20Round">Investor contact · Moe@trybytes.ai</a></p>
+          <p style="font-size:15px;font-weight:700;margin-top:20px"><a href="mailto:Moe@trybytes.ai?subject=Bytes%20AI%20%E2%80%94%20Full%20pitch%20deck%20request">Or reach us directly · Moe@trybytes.ai</a></p>
         </div>
-        <p id="viewer-line" style="padding-top:28px;font-size:13px;color:#78716c;text-align:center">Bytes AI · Confidential · Seed 2026</p>
+        <p id="viewer-line" style="padding:18px 0 34px;font-size:13px;color:#78716c;text-align:center">Bytes AI · Confidential · Seed 2026</p>
       </div>
     </section>
 
@@ -798,7 +648,36 @@
   <script>
   (function () {
     'use strict';
-    var CAPTURE_ENDPOINT = ''; // optional: POST { email, source } here on unlock
+    /* ── Lead capture ──
+       Paste the Google Apps Script web-app /exec URL here to log both the
+       gate unlock and the full-deck request to the Google Sheet.
+       Setup steps: SHEETS-SETUP.md */
+    var CAPTURE_ENDPOINT = '';
+
+    /* Posts one row to the sheet. Apps Script sends no CORS headers, so this
+       goes out as a simple no-cors request: it lands, we just cannot read the
+       reply. Every row is mirrored to localStorage so nothing is lost if the
+       endpoint is unset or down. */
+    function sendCapture(payload) {
+      payload.deck = 'Bytes AI Teaser Deck';
+      payload.at = new Date().toISOString();
+      payload.page = location.href;
+      payload.referrer = document.referrer || '';
+      try {
+        var log = JSON.parse(localStorage.getItem('bytes_captures') || '[]');
+        log.push(payload);
+        localStorage.setItem('bytes_captures', JSON.stringify(log));
+      } catch (err) {}
+      if (!CAPTURE_ENDPOINT) return Promise.resolve(false);
+      return fetch(CAPTURE_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(function () { return true; }).catch(function () { return false; });
+    }
+
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     /* ── Email gate ── */
     var gateForm = document.getElementById('gate-form');
@@ -808,6 +687,8 @@
       if (email) {
         var v = document.getElementById('viewer-line');
         if (v) v.textContent = 'Bytes AI · Confidential · Seed 2026 · Shared with ' + email;
+        var re = document.getElementById('req-email');
+        if (re && !re.value) re.value = email;
       }
     }
     try {
@@ -817,22 +698,34 @@
     gateForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = gateEmail.value.trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-      try {
-        localStorage.setItem('bytes_investor_email', email);
-        var log = JSON.parse(localStorage.getItem('bytes_captured_emails') || '[]');
-        log.push({ email: email, at: new Date().toISOString() });
-        localStorage.setItem('bytes_captured_emails', JSON.stringify(log));
-      } catch (err) {}
-      if (CAPTURE_ENDPOINT) {
-        fetch(CAPTURE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ email: email, source: 'Bytes AI investor deck' })
-        }).catch(function () {});
-      }
+      if (!email || !EMAIL_RE.test(email)) return;
+      try { localStorage.setItem('bytes_investor_email', email); } catch (err) {}
+      sendCapture({ event: 'gate_unlock', email: email, name: '', firm: '' });
       unlock(email);
       initView();
+    });
+
+    /* ── Full-deck request (last slide) ── */
+    var reqForm = document.getElementById('req-form');
+    var reqDone = document.getElementById('req-done');
+    var reqError = document.getElementById('req-error');
+    reqForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('req-name').value.trim();
+      var email = document.getElementById('req-email').value.trim();
+      var firm = document.getElementById('req-firm').value.trim();
+      reqError.style.display = 'none';
+      if (!name) { reqError.textContent = 'Please add your name.'; reqError.style.display = 'block'; return; }
+      if (!EMAIL_RE.test(email)) { reqError.textContent = 'Please check that email address.'; reqError.style.display = 'block'; return; }
+      var btn = reqForm.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      sendCapture({ event: 'deck_request', email: email, name: name, firm: firm }).then(function () {
+        var line = document.getElementById('req-done-line');
+        if (line) line.textContent = 'We\u2019ll send the full deck to ' + email + ' shortly.';
+        reqForm.style.display = 'none';
+        reqDone.style.display = 'block';
+      });
     });
 
     /* ── Deck engine ── */
@@ -853,7 +746,14 @@
       vp.className = 'thumb-viewport';
       var canvas = document.createElement('div');
       canvas.className = 'thumb-canvas';
-      canvas.appendChild(slide.querySelector('.inner').cloneNode(true));
+      /* Thumbnails are decorative copies of the slide. Strip their ids so the
+         live slide keeps the only #req-form / #viewer-line in the document,
+         and mark them inert so nothing inside a thumbnail takes focus. */
+      var clone = slide.querySelector('.inner').cloneNode(true);
+      clone.removeAttribute('id');
+      Array.prototype.forEach.call(clone.querySelectorAll('[id]'), function (n) { n.removeAttribute('id'); });
+      clone.inert = true;
+      canvas.appendChild(clone);
       vp.appendChild(canvas);
       var meta = document.createElement('div');
       meta.className = 'tmeta';
@@ -904,17 +804,8 @@
     document.getElementById('btn-overview').addEventListener('click', function () {
       document.body.classList.toggle('overview-open');
     });
-    /* Download the pre-rendered desktop PDF (same 16:10 deck on every device).
-       Regenerate bytes-ai-investor-deck.pdf whenever slide content changes. */
-    function downloadPdf() {
-      var a = document.createElement('a');
-      a.href = 'bytes-ai-investor-deck.pdf';
-      a.download = 'Bytes AI — Investor Deck.pdf';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-    document.getElementById('btn-print').addEventListener('click', downloadPdf);
+    /* No PDF download on the teaser: the full deck is gated behind the
+       request form on the last slide. Ctrl/Cmd+P still prints the teaser. */
     document.getElementById('ov-close').addEventListener('click', function () {
       document.body.classList.remove('overview-open');
     });
@@ -970,11 +861,6 @@
     /* keyboard */
     document.addEventListener('keydown', function (e) {
       if (!document.body.classList.contains('unlocked')) return;
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
-        e.preventDefault();
-        downloadPdf();
-        return;
-      }
       if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
       switch (e.key) {
         case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': e.preventDefault(); next(); break;
@@ -984,7 +870,6 @@
         case 'f': case 'F': document.getElementById('btn-fs').click(); break;
         case 'g': case 'G': document.getElementById('btn-overview').click(); break;
         case 't': case 'T': document.getElementById('btn-rail').click(); break;
-        case 'p': case 'P': e.preventDefault(); downloadPdf(); break;
         case 'Escape': document.body.classList.remove('overview-open'); break;
       }
     });

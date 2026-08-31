@@ -2,7 +2,7 @@
   "name": "bytes-ai-investor-one-pager",
   "private": true,
   "version": "1.0.0",
-  "description": "Bytes AI investor one-pager landing page (static site).",
+  "description": "Bytes AI Teaser Deck at /, with the archived full investor deck at /full-deck.html (static site).",
   "scripts": {
     "start": "serve . -l ${PORT:-3000}"
   },

@@ -1,6 +1,6 @@
 # Logging teaser-deck leads to Google Sheets
 
-`v2.html` captures two things and posts them as rows to a Google Sheet:
+`index.html` (the teaser deck) captures two things and posts them as rows to a Google Sheet:
 
 | Event | Fires when |
 | --- | --- |
@@ -37,7 +37,7 @@ steps are yours to run.
 6. Authorize when prompted. Google will warn that the app is unverified
    because you just wrote it; choose **Advanced → Go to (project name)**.
 7. Copy the **Web app URL**. It ends in `/exec`.
-8. Send me that URL and I will drop it into `v2.html`, or paste it yourself
+8. Send me that URL and I will drop it into `index.html`, or paste it yourself
    into the `CAPTURE_ENDPOINT` line near the top of the page's `<script>`:
 
    ```js
