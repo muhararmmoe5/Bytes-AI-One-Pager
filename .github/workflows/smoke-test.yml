@@ -1,0 +1,43 @@
+# On-demand smoke test for the live teaser deck.
+# Checks that one-pager.trybytes.ai serves the teaser with the capture
+# endpoint wired, that the Apps Script endpoint answers, and that a POST
+# writes a row (labeled "endpoint_test" — safe to delete from the sheet).
+name: smoke-test
+on: workflow_dispatch
+
+env:
+  SITE: https://one-pager.trybytes.ai
+  ENDPOINT: https://script.google.com/macros/s/AKfycbxcPyZvgsnc8min1xhaFJr33bwmzMf20ki-_0wa7hk65Ab-9SQCHLojAoulhh9x5Gs/exec
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Live site serves the teaser
+        run: |
+          html=$(curl -sSL --max-time 30 "$SITE/")
+          echo "$html" | grep -q "Bytes AI — Teaser Deck" && echo "PASS: title is Teaser Deck"
+          echo "$html" | grep -q 'data-label="Request the deck"' && echo "PASS: CTA slide present"
+          echo "$html" | grep -q 'script.google.com/macros/s/AKfycbxcPyZvgsnc8min1xhaFJr33bwmzMf20ki' && echo "PASS: capture endpoint wired into the page"
+          if echo "$html" | grep -q 'data-label="Team"'; then echo "FAIL: cut slides leaked into the teaser"; exit 1; else echo "PASS: cut slides absent"; fi
+          echo "$html" | grep -q 'id="btn-print"' && { echo "FAIL: PDF download button present"; exit 1; } || echo "PASS: no PDF download button"
+
+      - name: Archived full deck still reachable
+        run: |
+          html=$(curl -sSL --max-time 30 "$SITE/full-deck.html")
+          echo "$html" | grep -q "Bytes AI — Investor Deck" && echo "PASS: full deck alive at /full-deck.html"
+
+      - name: Capture endpoint answers (GET)
+        run: |
+          out=$(curl -sSL --max-time 60 "$ENDPOINT")
+          echo "GET response: $out"
+          echo "$out" | grep -qi "live" && echo "PASS: endpoint deployed and authorized"
+
+      - name: Endpoint writes a row (POST)
+        run: |
+          now=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          out=$(curl -sSL --max-time 60 -H 'Content-Type: text/plain;charset=utf-8' \
+            --data "{\"event\":\"endpoint_test\",\"email\":\"smoke-test@github-actions\",\"name\":\"test row — safe to delete\",\"firm\":\"\",\"deck\":\"Bytes AI Teaser Deck\",\"at\":\"$now\",\"page\":\"github-actions smoke test\",\"referrer\":\"\"}" \
+            "$ENDPOINT")
+          echo "POST response: $out"
+          echo "$out" | grep -q '"ok":true' && echo "PASS: row accepted — check the Leads sheet"
