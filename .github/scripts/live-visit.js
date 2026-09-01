@@ -6,7 +6,16 @@ const { chromium } = require('playwright-core');
 (async () => {
   const site = process.env.SITE || 'https://one-pager.trybytes.ai';
   const b = await chromium.launch({ channel: 'chrome' });
-  const page = await b.newPage();
+  /* posthog-js drops events from browsers that look automated (HeadlessChrome
+     UA, navigator.webdriver). Pose as a human so captures actually flow —
+     that's the behavior real visitors get. */
+  const ctx = await b.newContext({
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+  });
+  const page = await ctx.newPage();
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+  });
   const ph = [];
   let flagsBody = null;
   const isIngest = u => u.includes('/i/v0/e') || u.includes('/batch') || /posthog\.com\/e\/?(\?|$)/.test(u);
