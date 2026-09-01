@@ -21,6 +21,8 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Live site serves the teaser
         run: |
           html=$(curl -sSL --max-time 30 "$SITE/")
@@ -29,6 +31,7 @@ jobs:
           echo "$html" | grep -q 'script.google.com/macros/s/AKfycbxcPyZvgsnc8min1xhaFJr33bwmzMf20ki' && echo "PASS: capture endpoint wired into the page"
           if echo "$html" | grep -q 'data-label="Team"'; then echo "FAIL: cut slides leaked into the teaser"; exit 1; else echo "PASS: cut slides absent"; fi
           echo "$html" | grep -q 'id="gate-code"' && echo "PASS: passcode gate present"
+          echo "$html" | grep -q "$PH_KEY" && echo "PASS: PostHog key in live page" || { echo "FAIL: live page has no PostHog key — deploy stale?"; exit 1; }
           if echo "$html" | grep -q "BYTES2026"; then echo "FAIL: passcode readable in page source"; exit 1; else echo "PASS: passcode not in page source"; fi
           echo "$html" | grep -q 'id="btn-print"' && { echo "FAIL: PDF download button present"; exit 1; } || echo "PASS: no PDF download button"
 
@@ -57,6 +60,11 @@ jobs:
             -d "{\"api_key\":\"$PH_KEY\",\"event\":\"deck_smoke_test\",\"distinct_id\":\"smoke-test\",\"timestamp\":\"$now\",\"properties\":{\"source\":\"github-actions\"}}")
           echo "ingest response: $out"
           echo "$out" | grep -q '"status"' && echo "PASS: event ingested — visible in PostHog Activity as deck_smoke_test"
+
+      - name: Real Chrome visits the live deck (PostHog end-to-end)
+        run: |
+          npm i --no-save playwright-core@1.49.1 >/dev/null 2>&1
+          SITE="$SITE" node .github/scripts/live-visit.js
 
       - name: Capture endpoint answers (GET)
         run: |
