@@ -334,8 +334,13 @@
         <label for="gate-email">Email</label>
         <input id="gate-email" type="email" required placeholder="name@email.com" autocomplete="email">
       </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label for="gate-code">Passcode</label>
+        <input id="gate-code" type="text" required placeholder="From your invite" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      </div>
       <button type="submit" class="btn-primary">View the Deck</button>
-      <p style="font-size:13px;color:#8a827b;text-align:center">Instant access. We only use your email to follow up on the round.</p>
+      <p id="gate-error" role="alert" style="display:none;font-size:13px;color:#ff8a50;text-align:center;margin:0"></p>
+      <p style="font-size:13px;color:#8a827b;text-align:center">Access is by invitation — the passcode is in the message you received. We only use your email to follow up on the round.</p>
     </form>
   </div>
 
@@ -679,9 +684,16 @@
 
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    /* ── Email gate ── */
+    /* ── Entrance gate: email + passcode ──
+       Only the SHA-256 of the UPPERCASED passcode lives in the page, so the
+       code itself is not readable from the source. To change the passcode,
+       replace GATE_HASH with the new hash
+       (python3 -c "import hashlib;print(hashlib.sha256('NEWCODE'.encode()).hexdigest())"). */
+    var GATE_HASH = 'c96bf6bd7cd9f5e687af0c2e545cf4d275b68b9b9d6177726f53716fbcd120e6';
     var gateForm = document.getElementById('gate-form');
     var gateEmail = document.getElementById('gate-email');
+    var gateCode = document.getElementById('gate-code');
+    var gateError = document.getElementById('gate-error');
     function unlock(email) {
       document.body.classList.add('unlocked');
       if (email) {
@@ -693,16 +705,43 @@
     }
     try {
       var saved = localStorage.getItem('bytes_investor_email');
-      if (saved) unlock(saved);
+      if (saved) {
+        gateEmail.value = saved;
+        /* only sessions that came through the passcode gate skip it */
+        if (localStorage.getItem('bytes_gate_v2')) unlock(saved);
+      }
     } catch (e) {}
+    function sha256Hex(text) {
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+          return b.toString(16).padStart(2, '0');
+        }).join('');
+      });
+    }
     gateForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      gateError.style.display = 'none';
       var email = gateEmail.value.trim();
-      if (!email || !EMAIL_RE.test(email)) return;
-      try { localStorage.setItem('bytes_investor_email', email); } catch (err) {}
-      sendCapture({ event: 'gate_unlock', email: email, name: '', firm: '' });
-      unlock(email);
-      initView();
+      var code = gateCode.value.trim().toUpperCase();
+      if (!email || !EMAIL_RE.test(email) || !code) return;
+      sha256Hex(code).then(function (hex) {
+        if (hex !== GATE_HASH) {
+          gateError.textContent = 'That passcode isn\u2019t right \u2014 it\u2019s in the invite you received.';
+          gateError.style.display = 'block';
+          gateCode.focus();
+          return;
+        }
+        try {
+          localStorage.setItem('bytes_investor_email', email);
+          localStorage.setItem('bytes_gate_v2', '1');
+        } catch (err) {}
+        sendCapture({ event: 'gate_unlock', email: email, name: '', firm: '' });
+        unlock(email);
+        initView();
+      }).catch(function () {
+        gateError.textContent = 'Your browser blocked the passcode check \u2014 please try a current browser.';
+        gateError.style.display = 'block';
+      });
     });
 
     /* ── Full-deck request (last slide) ── */

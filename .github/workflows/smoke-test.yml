@@ -3,7 +3,13 @@
 # endpoint wired, that the Apps Script endpoint answers, and that a POST
 # writes a row (labeled "endpoint_test" — safe to delete from the sheet).
 name: smoke-test
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      post_test_row:
+        description: "Also POST a labeled test row to the sheet"
+        type: boolean
+        default: false
 
 env:
   SITE: https://one-pager.trybytes.ai
@@ -20,6 +26,8 @@ jobs:
           echo "$html" | grep -q 'data-label="Request the deck"' && echo "PASS: CTA slide present"
           echo "$html" | grep -q 'script.google.com/macros/s/AKfycbxcPyZvgsnc8min1xhaFJr33bwmzMf20ki' && echo "PASS: capture endpoint wired into the page"
           if echo "$html" | grep -q 'data-label="Team"'; then echo "FAIL: cut slides leaked into the teaser"; exit 1; else echo "PASS: cut slides absent"; fi
+          echo "$html" | grep -q 'id="gate-code"' && echo "PASS: passcode gate present"
+          if echo "$html" | grep -q "BYTES2026"; then echo "FAIL: passcode readable in page source"; exit 1; else echo "PASS: passcode not in page source"; fi
           echo "$html" | grep -q 'id="btn-print"' && { echo "FAIL: PDF download button present"; exit 1; } || echo "PASS: no PDF download button"
 
       - name: Archived full deck still reachable
@@ -34,6 +42,7 @@ jobs:
           echo "$out" | grep -qi "live" && echo "PASS: endpoint deployed and authorized"
 
       - name: Endpoint writes a row (POST)
+        if: ${{ inputs.post_test_row }}
         run: |
           now=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           out=$(curl -sSL --max-time 60 -H 'Content-Type: text/plain;charset=utf-8' \
