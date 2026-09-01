@@ -16,12 +16,20 @@ const { chromium } = require('playwright-core');
     ph.push(`${r.status()} ${r.request().method()} ${u.split('?')[0]}`);
     if (u.includes('/flags')) { try { flagsBody = await r.text(); } catch (e) {} }
   });
+  page.on('request', r => {
+    if (r.url().includes('posthog.com')) ph.push(`SENT    ${r.method()} ${r.url().split('?')[0]}`);
+  });
   page.on('requestfailed', r => {
     if (r.url().includes('posthog.com')) {
       ph.push(`FAILED ${r.method()} ${r.url().split('?')[0]} (${r.failure() && r.failure().errorText})`);
     }
   });
-  page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') console.log(`console.${m.type()}:`, m.text().slice(0, 300)); });
+  const phLogs = [];
+  page.on('console', m => {
+    const t = m.text();
+    if (/posthog/i.test(t)) { phLogs.push(t.slice(0, 260)); return; }
+    if (m.type() === 'error' || m.type() === 'warning') console.log(`console.${m.type()}:`, t.slice(0, 300));
+  });
   page.on('pageerror', e => console.log('pageerror:', e.message));
 
   await page.goto(site + '/', { waitUntil: 'load', timeout: 45000 });
@@ -29,6 +37,10 @@ const { chromium } = require('playwright-core');
   console.log('title            :', await page.title());
   console.log('posthog loaded   :', await page.evaluate(() =>
     !!(window.posthog && (window.posthog.__loaded || typeof window.posthog.get_distinct_id === 'function'))));
+  await page.evaluate(() => {
+    try { window.posthog.set_config({ debug: true }); } catch (e) {}
+  });
+  console.log('config.api_host  :', await page.evaluate(() => window.posthog && window.posthog.config && window.posthog.config.api_host));
 
   await page.fill('#gate-email', 'posthog-live-test@trybytes.ai');
   await page.fill('#gate-code', 'BYTES2026');
@@ -61,6 +73,8 @@ const { chromium } = require('playwright-core');
       console.log('quotaLimited     :', JSON.stringify(f.quotaLimited || f.quota_limited || 'not present'));
     } catch (e) {}
   }
+  console.log('--- posthog debug log (first 40 lines) ---');
+  console.log(phLogs.slice(0, 40).join('\n') || '(posthog said nothing)');
   const assets = ph.some(x => /^2\d\d GET .*\/static\/array\.js/.test(x));
   const ingest = ph.filter(x => /^2\d\d POST /.test(x) && isIngest(x));
   console.log('array.js loaded  :', assets ? 'PASS' : 'FAIL');
